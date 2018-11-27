@@ -1,0 +1,522 @@
+{
+	"info": {
+		"_postman_id": "a4e03f66-60cc-4f22-90b7-5ec3fca858ff",
+		"name": "bawabetelkhaleg.com",
+		"description": "/*\n\n* it is all api for this project \n\n*/",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "sub_categories",
+					"item": [],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "http://bawabetelkhaleg.com/api/user/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "m2@m.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://bawabetelkhaleg.com/api/user/login",
+						"description": "/*\n\n\n* Login using email and password \n\n*/"
+					},
+					"response": []
+				},
+				{
+					"name": "http://bawabetelkhaleg.com/api/user/register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "mohamed ata",
+									"type": "text"
+								},
+								{
+									"key": "mobile",
+									"value": "01148808417",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "address",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "m2@m.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://bawabetelkhaleg.com/api/user/register",
+						"description": "/*\n\n* it is register of user with image (you can register without upload image and image will return with null )\n*/"
+					},
+					"response": []
+				},
+				{
+					"name": "http://bawabetelkhaleg.com/api/get/user/user_id=1",
+					"request": {
+						"method": null,
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "f9729841ed658e7bd9b4b96ec7186d601a6d20801540396736",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://bawabetelkhaleg.com/api/get/user/user_id=1",
+						"description": "/*\n\n* get user account data using id of user {user_id = spescific user id }\n*/"
+					},
+					"response": []
+				},
+				{
+					"name": "http://bawabetelkhaleg.com/api/logout",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AuthKey",
+								"value": "3992750f939c1e0f6d9f22e64adee31ea9108f181540396656",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://bawabetelkhaleg.com/api/logout",
+						"description": "/*\nuser can have multiple token from one or more devices you can send me the token only to logout \n\n\nAuthKey=> token\n*/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "http://bawabetelkhaleg.com/api/categories",
+					"request": {
+						"method": null,
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://bawabetelkhaleg.com/api/categories"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sub Categories",
+			"item": [
+				{
+					"name": "http://bawabetelkhaleg.com/api/direct_subcategories",
+					"request": {
+						"method": null,
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://bawabetelkhaleg.com/api/direct_subcategories",
+						"description": "/*\n\n* it is sub_categories that when click on it you can find advertisments \n\n*/"
+					},
+					"response": []
+				},
+				{
+					"name": "http://bawabetelkhaleg.com/api/subcategories/category_id=1",
+					"request": {
+						"method": null,
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://bawabetelkhaleg.com/api/subcategories/category_id=1",
+						"description": "/*\n* it is sub category for one category like ايجار \n* you can find sub categories for one category to find advertisments \n*/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cities",
+			"item": [
+				{
+					"name": "http://bawabetelkhaleg.com/api/cities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://bawabetelkhaleg.com/api/cities",
+						"description": "/* get all cities */\nyou can use this api when user add advertisment you make user to choose one city from list "
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Prices",
+			"item": [
+				{
+					"name": "http://bawabetelkhaleg.com/api/get/price/for/all/page=1",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AuthKey",
+								"value": "3992750f939c1e0f6d9f22e64adee31ea9108f181540396656",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://bawabetelkhaleg.com/api/get/price/for/all/page=1",
+						"description": "\nget price of user advertisment that you will pay it to admin by charge and contact admin to approve your advertisments by admin panel "
+					},
+					"response": []
+				},
+				{
+					"name": "http://bawabetelkhaleg.com/api/get/price/for/sub_category_id=1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://bawabetelkhaleg.com/api/get/price/for/sub_category_id=1",
+						"description": "/*\n* get sub_categories price using id \n*/"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "partnerships",
+			"item": [
+				{
+					"name": "http://bawabetelkhaleg.com/api/user/send/partnership",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "f9729841ed658e7bd9b4b96ec7186d601a6d20801540396736",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": ""
+								}
+							]
+						},
+						"url": "http://bawabetelkhaleg.com/api/user/send/partnership"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "contact us ",
+			"item": [
+				{
+					"name": "http://bawabetelkhaleg.com/api/contact_us",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "f9729841ed658e7bd9b4b96ec7186d601a6d20801540396736",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "message",
+									"value": "message",
+									"type": "text"
+								},
+								{
+									"key": "subject",
+									"value": "subject",
+									"type": "text"
+								},
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://bawabetelkhaleg.com/api/contact_us"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Advertisements",
+			"item": [
+				{
+					"name": "report",
+					"item": [
+						{
+							"name": "http://bawabetelkhaleg.com/api/report",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "f9729841ed658e7bd9b4b96ec7186d601a6d20801540396736",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "why",
+											"value": "message",
+											"type": "text"
+										},
+										{
+											"key": "advertisement_id",
+											"value": "2",
+											"type": "text"
+										}
+									]
+								},
+								"url": "http://bawabetelkhaleg.com/api/report",
+								"description": "Reports for single ads "
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "http://bawabetelkhaleg.com/api/advertisement/add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "f9729841ed658e7bd9b4b96ec7186d601a6d20801540396736",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "sub_category_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "new ads",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "address",
+									"type": "text"
+								},
+								{
+									"key": "city_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "01148808417",
+									"type": "text"
+								},
+								{
+									"key": "whatsapp",
+									"value": "01148808417",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "des",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": ""
+								},
+								{
+									"key": "price",
+									"value": "1000",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://bawabetelkhaleg.com/api/advertisement/add",
+						"description": "add new advertisements "
+					},
+					"response": []
+				},
+				{
+					"name": "http://bawabetelkhaleg.com/api/get/advertisement/for/sub_category=1&&page=1",
+					"request": {
+						"method": null,
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://bawabetelkhaleg.com/api/get/advertisement/for/sub_category=1&&page=1",
+						"description": "get using sub category "
+					},
+					"response": []
+				},
+				{
+					"name": "http://bawabetelkhaleg.com/api/get/advertisement/for/user/user_id=2&&page=2",
+					"request": {
+						"method": null,
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://bawabetelkhaleg.com/api/get/advertisement/for/user/user_id=2&&page=2",
+						"description": "get ads for single user "
+					},
+					"response": []
+				},
+				{
+					"name": "http://bawabetelkhaleg.com/api/get/advertisement/ads_id=2",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "f9729841ed658e7bd9b4b96ec7186d601a6d20801540396736",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://bawabetelkhaleg.com/api/get/advertisement/ads_id=2",
+						"description": "get single ads "
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Advertisements",
+			"item": []
+		}
+	]
+}
