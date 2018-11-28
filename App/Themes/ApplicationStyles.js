@@ -20,8 +20,7 @@ const ApplicationStyles = {
         },
         container: {
             flex: 1,
-            paddingTop: Metrics.baseMargin,
-            backgroundColor: Colors.transparent
+            padding : Metrics.baseMargin          
         },
         section: {
             margin: Metrics.section,
@@ -40,48 +39,11 @@ const ApplicationStyles = {
             marginBottom: Metrics.smallMargin,
             marginHorizontal: Metrics.smallMargin
         },
-        titleText: {
+        text: {
             ...Fonts.style.h2,
-            fontSize: 14,
-            color: Colors.text
+            fontSize: 14
         }
-    },
-    darkLabelContainer: {
-        padding: Metrics.smallMargin,
-        paddingBottom: Metrics.doubleBaseMargin,
-        borderBottomColor: Colors.border,
-        borderBottomWidth: 1,
-        marginBottom: Metrics.baseMargin
-    },
-    darkLabel: {
-        fontFamily: Fonts.type.bold,
-        color: Colors.snow
-    },
-    groupContainer: {
-        margin: Metrics.smallMargin,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center'
-    },
-    sectionTitle: {
-        ...Fonts.style.h4,
-        color: Colors.coal,
-        backgroundColor: Colors.ricePaper,
-        padding: Metrics.smallMargin,
-        marginTop: Metrics.smallMargin,
-        marginHorizontal: Metrics.baseMargin,
-        borderWidth: 1,
-        borderColor: Colors.ember,
-        alignItems: 'center',
-        textAlign: 'center'
-    },
-    centredView: {
-        alignItems: 'center',
-        paddingLeft: Metrics.paddingRight,
-        paddingRight: Metrics.paddingLeft,
-        flex: 1
-    },
-
+    }
 }
 
 export default ApplicationStyles

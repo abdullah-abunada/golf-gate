@@ -1,8 +1,8 @@
 const colors = {
-    c1:'#333399',
-    c2:'#3366CC',
-    c3:'#3399FF',
-    c4:'#ffffff'
+    green:'#98ff4c',
+    grey:'#636363',
+    black:'#090909',
+    white:'#ffffff'
 }
 
 export default colors

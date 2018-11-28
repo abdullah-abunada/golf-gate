@@ -4,12 +4,19 @@ import { createStackNavigator, createDrawerNavigator, createSwitchNavigator ,cre
 
 //screens
 
-import ContactScreen from '../containers/ContactScreen';
-import HomeScreen from '../containers/HomeScreen';
 import RegisterScreen from '../containers/RegisterScreen';
+import LoginScreen from '../containers/LoginScreen';
+
+import HomeScreen from '../containers/HomeScreen';
+import MainScreen from '../containers/MainScreen';
+import SectionScreen from '../containers/SectionScreen';
+import AdsDetailsScreen from '../containers/AdsDetailsScreen';
+
 import ProfileScreen from '../containers/ProfileScreen';
 import PolicyScreen from '../containers/PolicyScreen';
-import LoginScreen from '../containers/LoginScreen';
+import AddAdScreen from '../containers/AddAdScreen';
+import MyAddsScreen from '../containers/MyAddsScreen';
+import ContactScreen from '../containers/ContactScreen';
 
 //styles
 import styles from './Styles/NavigationContainerStyles'
@@ -26,10 +33,14 @@ import styles from './Styles/NavigationContainerStyles'
 
 const HomeStack = createStackNavigator(
     {
+        MainScreen: { screen: MainScreen },
+        HomeScreen: { screen: HomeScreen },
+        AdsDetailsScreen: { screen: AdsDetailsScreen },
+        SectionScreen: { screen: SectionScreen },
         HomeScreen: { screen: HomeScreen },
     }, {
         navigationOptions: {
-            initialRouteName: 'HomeScreen',
+            initialRouteName: 'MainScreen',
             headerMode: 'screen'
         }
     });
@@ -50,9 +61,10 @@ const AppStack = createDrawerNavigator(
     {
         HomeStack: { screen: HomeStack },
         ProfileScreen: { screen: ProfileScreen }, 
-        ContactScreen: { screen: ContactScreen },
-        PolicyScreen: { screen: PolicyScreen }
-
+        AddAdScreen: { screen: AddAdScreen },
+        MyAddsScreen: { screen: MyAddsScreen },        
+        PolicyScreen: { screen: PolicyScreen },
+        ContactScreen: { screen: ContactScreen }
     },
     {
          //contentComponent: props => <SideDrawer/>,

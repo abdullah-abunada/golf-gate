@@ -6,19 +6,19 @@ import { Button } from 'react-native-elements'
 // import YourActions from '../Redux/YourRedux'
 
 // Styles
-import styles from './Styles/HomeScreenStyle'
+import styles from './Styles/MainScreenStyle'
 
-class HomeScreen extends Component {
-  render () {
+class MainScreen extends Component {
+  render() {
     return (
       <ScrollView style={styles.container}>
         <KeyboardAvoidingView behavior='position'>
-          <Text>HomeScreen</Text>
+          <Text>MainScreen</Text>
           <Button
             large
             rightIcon={{ name: 'code' }}
             title='LARGE WITH RIGHT ICON'
-            onPress={()=>this.props.navigation.navigate("SectionScreen")} />
+            onPress={()=>this.props.navigation.navigate("HomeScreen")} />
         </KeyboardAvoidingView>
       </ScrollView>
     )
@@ -35,5 +35,5 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-//export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen)
-export default HomeScreen
+//export default connect(mapStateToProps, mapDispatchToProps)(MainScreen)
+export default MainScreen
