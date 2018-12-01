@@ -5,7 +5,9 @@ import rootSaga from '../Sagas/'
 
 /* ------------- Assemble The Reducers ------------- */
 export const reducers = combineReducers({
-  auth: require('./AuthRedux').reducer
+  auth: require('./AuthRedux').reducer,
+  categories : require('./CategoriesRedux').reducer
+  
 })
 
 export default () => {

@@ -5,7 +5,6 @@ import { AsyncStorage } from 'react-native'
 
 
 
-export const selectAuthToken = (state) => state.login.authToken
 
 
 
@@ -39,10 +38,6 @@ export function* register(api, { name, mobile, address, email, password }) {
     password: password
   }
 
-  console.log("---------------inside login")
-  console.log("---------------------------------authObj")
-  console.log(authObj)
-
   const response = yield call(api.register, authObj)
   if (response.ok) {
     console.log(response.data.user)
@@ -56,16 +51,16 @@ export function* register(api, { name, mobile, address, email, password }) {
 
 
 // attempts to logout
-export function* logout(api) {
+export function* logout(api,{token}) {
 
   const response = yield call(api.logout)
+  console.warn(response)
   if (response.ok) {
-    console.log('logout Succuessful')
-    yield call(api.removeAuthToken)
+    yield call(api.removeAuthToken,token)
     yield put(AuthActions.logoutSuccess())
   }
   else{
-    console.log("logout ki zebiiiiiiiiiiiiiiiiiiiii")
+
   }
 
 }

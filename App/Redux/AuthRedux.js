@@ -11,7 +11,7 @@ const { Types, Creators } = createActions({
   registerRequest: ['name','mobile','address','email', 'password'],
   loginSuccess: ['authToken'],
   loginFailure: ['error'],
-  logout: [],
+  logout: ['token'],
   logoutSuccess: [],
   logoutFailure: ['error'],
 

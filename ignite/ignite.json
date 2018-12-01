@@ -3,12 +3,13 @@
   "boilerplate": "empty",
   "examples": "none",
   "generators": {
-    "component": "ignite-ir-boilerplate",
-    "container": "ignite-ir-boilerplate",
-    "listview": "ignite-ir-boilerplate",
-    "list": "ignite-ir-boilerplate",
-    "redux": "ignite-ir-boilerplate",
-    "saga": "ignite-ir-boilerplate",
-    "screen": "ignite-ir-boilerplate"
+    "component": "ignite-ir-boilerplate-andross",
+    "container": "ignite-ir-boilerplate-andross",
+    "listview": "ignite-ir-boilerplate-andross",
+    "list": "ignite-ir-boilerplate-andross",
+    "redux": "ignite-ir-boilerplate-andross",
+    "saga": "ignite-ir-boilerplate-andross",
+    "screen": "ignite-ir-boilerplate-andross",
+    "model": "ignite-ir-boilerplate-bowser"
   }
 }

@@ -26,6 +26,8 @@
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
-    "ignite-ir-boilerplate": "^2.3.3"
+    "ignite-ir-boilerplate": "^2.3.3",
+    "ignite-ir-boilerplate-andross": "^2.3.3",
+    "ignite-ir-boilerplate-bowser": "^1.0.1"
   }
 }

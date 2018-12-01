@@ -33,14 +33,13 @@ import styles from './Styles/NavigationContainerStyles'
 
 const HomeStack = createStackNavigator(
     {
-        HomeScreen: { screen: HomeScreen },
         MainScreen: { screen: MainScreen },
         AdsDetailsScreen: { screen: AdsDetailsScreen },
         SectionScreen: { screen: SectionScreen }
 
     }, {
         navigationOptions: {
-            initialRouteName: 'HomeScreen',
+            initialRouteName: 'MainScreen',
             headerMode: 'screen'
         }
     });
@@ -59,6 +58,7 @@ const AuthStack = createStackNavigator({
 
 const AppStack = createDrawerNavigator(
     {
+        HomeScreen: { screen: HomeScreen },
         HomeStack: { screen: HomeStack },
         ProfileScreen: { screen: ProfileScreen }, 
         AddAdScreen: { screen: AddAdScreen },
@@ -69,6 +69,7 @@ const AppStack = createDrawerNavigator(
     {
          //contentComponent: props => <SideDrawer/>,
          initialRouteName: 'HomeStack',
+         headerMode: 'screen',
          drawerPosition :'right',
          navigationOptions: {
              //headerStyle: styles.header

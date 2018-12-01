@@ -37,11 +37,16 @@ const create = () => {
   // Since we can't hide from that, we embrace it by getting out of the
   // way at this level.
   //
-  const setAuthToken = (userAuth) => api.setHeader('Authorization', 'Bearer ' + userAuth)
+  const setAuthToken = (token) => api.setHeader('Authorization',token)
   const removeAuthToken = () => api.setHeader('Authorization', '')
-  const login = (userAuth) => api.post('api/user/login', userAuth)
-  const register = (userAuth) => api.post('api/user/register', userAuth)
+  const login = (authObj) => api.post('api/user/login', authObj)
+  const register = (authObj) => api.post('api/user/register', authObj)
   const logout =()=> api.get('api/logout')
+
+
+
+
+  const getCategories =()=> api.get('api/categories')
   
   // ignite-jhipster-api-method-needle
 
@@ -59,7 +64,8 @@ const create = () => {
   //
   return {
     // a list of the API functions from step 2
-    login,register,setAuthToken,removeAuthToken,logout
+    login,register,setAuthToken,removeAuthToken,logout,
+    getCategories
   }
 }
 
