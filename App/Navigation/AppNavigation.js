@@ -33,14 +33,14 @@ import styles from './Styles/NavigationContainerStyles'
 
 const HomeStack = createStackNavigator(
     {
+        HomeScreen: { screen: HomeScreen },
         MainScreen: { screen: MainScreen },
-        HomeScreen: { screen: HomeScreen },
         AdsDetailsScreen: { screen: AdsDetailsScreen },
-        SectionScreen: { screen: SectionScreen },
-        HomeScreen: { screen: HomeScreen },
+        SectionScreen: { screen: SectionScreen }
+
     }, {
         navigationOptions: {
-            initialRouteName: 'MainScreen',
+            initialRouteName: 'HomeScreen',
             headerMode: 'screen'
         }
     });
@@ -85,7 +85,7 @@ const PrimaryNav = createSwitchNavigator(
         Auth: AuthStack,
     },
     {
-        initialRouteName: 'Auth',
+        initialRouteName: 'App',
     }
 );
 

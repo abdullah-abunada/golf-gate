@@ -14,7 +14,7 @@
 					"item": [],
 					"_postman_isSubFolder": true
 				},
-				{
+				{////done----------------
 					"name": "http://bawabetelkhaleg.com/api/user/login",
 					"request": {
 						"method": "POST",
@@ -39,7 +39,7 @@
 					},
 					"response": []
 				},
-				{
+				{////done----------------
 					"name": "http://bawabetelkhaleg.com/api/user/register",
 					"request": {
 						"method": "POST",
@@ -137,7 +137,7 @@
 				}
 			]
 		},
-		{
+		{////done----------------
 			"name": "Categories",
 			"item": [
 				{
@@ -155,7 +155,7 @@
 				}
 			]
 		},
-		{
+		{////done----------------
 			"name": "Sub Categories",
 			"item": [
 				{
@@ -172,7 +172,7 @@
 					},
 					"response": []
 				},
-				{
+				{//----done
 					"name": "http://bawabetelkhaleg.com/api/subcategories/category_id=1",
 					"request": {
 						"method": null,
@@ -188,7 +188,7 @@
 				}
 			]
 		},
-		{
+		{///----done
 			"name": "cities",
 			"item": [
 				{
@@ -207,7 +207,7 @@
 				}
 			]
 		},
-		{
+		{//----done
 			"name": "Prices",
 			"item": [
 				{
@@ -236,7 +236,7 @@
 					},
 					"response": []
 				},
-				{
+				{//------done
 					"name": "http://bawabetelkhaleg.com/api/get/price/for/sub_category_id=1",
 					"request": {
 						"method": "GET",
