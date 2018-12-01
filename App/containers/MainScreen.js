@@ -14,13 +14,13 @@ class MainScreen extends Component {
 
 
   componentWillMount() {
-  //  this.props.categoriesRequest()
+    //  this.props.categoriesRequest()
   }
 
   renderRow({ item }) {
     return (
-      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-        <Text>{this.props.categories.name}</Text>
+      <View key={item.id} style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <Text>{item.name}</Text>
       </View>
     )
   }
@@ -38,17 +38,17 @@ class MainScreen extends Component {
 
 
   renderContent = () => {
-    if (true)
-      return (
-        <FlatList
-          contentContainerStyle={styles.listContent}
-          data={this.props.categories}
-          renderItem={this.renderRow}
-          numColumns={1}
-          keyExtractor={this.keyExtractor}
-          initialNumToRender={this.oneScreensWorth}
-        />
-      )
+    //if (true)
+    return (
+      <FlatList
+        contentContainerStyle={styles.listContent}
+        data={this.props.categories}
+        renderItem={this.renderRow}
+        numColumns={1}
+        keyExtractor={this.keyExtractor}
+        initialNumToRender={this.oneScreensWorth}
+      />
+    )
   }
   render() {
     return (
@@ -60,10 +60,10 @@ class MainScreen extends Component {
 
 }
 
-const mapStateToProps = ({ categories }) => {
+const mapStateToProps = (state) => {
   return {
-    categories: categories.payload,
-    fetching: categories.fetching
+    categories: state.categories.categories,
+    fetching: state.categories.fetching
   }
 }
 

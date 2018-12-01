@@ -15,7 +15,7 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  payload: [{
+  categories: [{
     id: 4,
     name: "مباردات شركات ومؤسسات",
     created_at: "2018-11-17 06:21:54"
@@ -29,6 +29,15 @@ export const INITIAL_STATE = Immutable({
     created_at: "2018-11-17 06:21:54"
   }
   ],
+  subCategories:[{
+    sub_category_id: 6,
+    sub_category: "شقق للايجار ",
+    created_at: "2018-11-17 06:54:46"
+  },{
+    sub_category_id: 6,
+    sub_category: "شقق للايجار ",
+    created_at: "2018-11-17 06:54:46"
+  }],
   fetching: null,
   error: null
 })
