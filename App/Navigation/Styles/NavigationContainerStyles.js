@@ -1,19 +1,15 @@
 import {Colors} from '../../Themes/'
 
 export default {
-  container: {
-    flex: 1
-  },
-  navBar: {
-    backgroundColor: Colors.background
-  },
-  title: {
-    color: Colors.snow
-  },
-  leftButton: {
-    tintColor: Colors.snow
-  },
-  rightButton: {
-    color: Colors.snow
+  header:{
+    backgroundColor:Colors.lightg,
+  },title:{
+    color:Colors.white
+  },iconContainer:{
+    paddingRight: 20
+  },headerContainer:{
+    justifyContent:'flex-end',
   }
+
+
 }

@@ -5,7 +5,11 @@ import Immutable from 'seamless-immutable'
 
 const { Types, Creators } = createActions({
   categoriesRequest: [],
+  subCategoriesRequest: ['cat_id'],
+  citiesRequest: [],
   categoriesSuccess: ['payload'],
+  subCategoriesSuccess: ['payload'],
+  citiesSuccess:['payload'],
   categoriesFailure: null
 })
 
@@ -15,29 +19,9 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  categories: [{
-    id: 4,
-    name: "مباردات شركات ومؤسسات",
-    created_at: "2018-11-17 06:21:54"
-  },{
-    id: 5,
-    name: "مباردات شركات ومؤسسات",
-    created_at: "2018-11-17 06:21:54"
-  },{
-    id: 6,
-    name: "مباردات شركات ومؤسسات",
-    created_at: "2018-11-17 06:21:54"
-  }
-  ],
-  subCategories:[{
-    sub_category_id: 6,
-    sub_category: "شقق للايجار ",
-    created_at: "2018-11-17 06:54:46"
-  },{
-    sub_category_id: 6,
-    sub_category: "شقق للايجار ",
-    created_at: "2018-11-17 06:54:46"
-  }],
+  categories: null,
+  subCategories:null,
+  cities:null,
   fetching: null,
   error: null
 })
@@ -55,11 +39,20 @@ export const request = (state) =>
   state.merge({ fetching: true, error : null})
 
 // successful api lookup
-export const success = (state, action) => {
-  const { payload } = action
-  return state.merge({ fetching: false, error: null,  payload })
+export const catSuccess = (state, action) => {
+  const { categories } = action.payload
+  return state.merge({ fetching: false, error: null,categories})
 }
 
+export const subCatSuccess = (state, action) => {
+ const { sub_categories } = action.payload
+  return state.merge({ fetching: false, error: null,subCategories:sub_categories})
+}
+
+export const citiesSuccess = (state, action) => {
+  const { cities } = action.payload
+  return state.merge({ fetching: false, error: null,cities:cities})
+}
 // Something went wrong somewhere.
 export const failure = state =>
   state.merge({ fetching: false, error: 'error', payload: null })
@@ -68,6 +61,10 @@ export const failure = state =>
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CATEGORIES_REQUEST]: request,
-  [Types.CATEGORIES_SUCCESS]: success,
+  [Types.SUB_CATEGORIES_REQUEST]: request,
+  [Types.CITIES_REQUEST]: request,
+  [Types.CATEGORIES_SUCCESS]: catSuccess,
+  [Types.SUB_CATEGORIES_SUCCESS]: subCatSuccess,
+  [Types.CITIES_SUCCESS]: citiesSuccess,
   [Types.CATEGORIES_FAILURE]: failure
 })

@@ -10,11 +10,6 @@
 			"name": "Auth",
 			"item": [
 				{
-					"name": "sub_categories",
-					"item": [],
-					"_postman_isSubFolder": true
-				},
-				{////done----------------
 					"name": "http://bawabetelkhaleg.com/api/user/login",
 					"request": {
 						"method": "POST",
@@ -39,7 +34,7 @@
 					},
 					"response": []
 				},
-				{////done----------------
+				{
 					"name": "http://bawabetelkhaleg.com/api/user/register",
 					"request": {
 						"method": "POST",
@@ -77,11 +72,15 @@
 									"key": "password",
 									"value": "123456",
 									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": ""
 								}
 							]
 						},
-						"url": "http://bawabetelkhaleg.com/api/user/register",
-						"description": "/*\n\n* it is register of user with image (you can register without upload image and image will return with null )\n*/"
+						"url": "http://bawabetelkhaleg.com/api/user/register"
 					},
 					"response": []
 				},
@@ -137,7 +136,7 @@
 				}
 			]
 		},
-		{////done----------------
+		{
 			"name": "Categories",
 			"item": [
 				{
@@ -155,7 +154,7 @@
 				}
 			]
 		},
-		{////done----------------
+		{
 			"name": "Sub Categories",
 			"item": [
 				{
@@ -172,7 +171,7 @@
 					},
 					"response": []
 				},
-				{//----done
+				{
 					"name": "http://bawabetelkhaleg.com/api/subcategories/category_id=1",
 					"request": {
 						"method": null,
@@ -188,7 +187,7 @@
 				}
 			]
 		},
-		{///----done
+		{
 			"name": "cities",
 			"item": [
 				{
@@ -207,7 +206,7 @@
 				}
 			]
 		},
-		{//----done
+		{
 			"name": "Prices",
 			"item": [
 				{
@@ -236,7 +235,7 @@
 					},
 					"response": []
 				},
-				{//------done
+				{
 					"name": "http://bawabetelkhaleg.com/api/get/price/for/sub_category_id=1",
 					"request": {
 						"method": "GET",
@@ -473,6 +472,20 @@
 					"response": []
 				},
 				{
+					"name": "http://bawabetelkhaleg.com/api/get/advertisement/for/sub_category=2&city_id=1&page=1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://bawabetelkhaleg.com/api/get/advertisement/for/sub_category=2&city_id=1&page=1",
+						"description": "{\n\tsub_category => id of sub_category\n\t\n\tcity_id\t\t=> city_id that you need ads\n\t\n\tpage\t\t=> page_number \n}"
+					},
+					"response": []
+				},
+				{
 					"name": "http://bawabetelkhaleg.com/api/get/advertisement/for/user/user_id=2&&page=2",
 					"request": {
 						"method": null,
@@ -513,10 +526,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "Advertisements",
-			"item": []
 		}
 	]
 }

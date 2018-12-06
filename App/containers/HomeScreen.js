@@ -6,7 +6,7 @@ import AuthActions from '../Redux/AuthRedux'
 import { connect } from "react-redux";
 
 
-import styles from './Styles/HomeScreenStyle'
+import styles from './Styles/HomeScreenStyles'
 import {Metrics,Colors} from '../Themes'
 
 class HomeScreen extends Component {

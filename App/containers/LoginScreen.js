@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 
 import { Colors, Strings, Metrics,Images } from '../Themes'
 // Styles
-import styles from './Styles/LoginScreenStyle'
+import styles from './Styles/LoginScreenStyles'
 
 class LoginScreen extends Component {
   render() {
@@ -70,13 +70,13 @@ class LoginScreen extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({auth}) => {
   return {
-      email: state.auth.email,
-      password: state.auth.password,
-      fetching: state.auth.fetching,
-      error: state.auth.error,
-      authToken: state.auth.user.token
+      email: auth.email,
+      password: auth.password,
+      fetching: auth.fetching,
+      error: auth.error,
+      authToken: auth.user.token
   }
 }
 

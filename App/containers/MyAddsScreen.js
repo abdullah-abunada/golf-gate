@@ -5,7 +5,7 @@ import { ScrollView, Text, KeyboardAvoidingView } from 'react-native'
 // import YourActions from '../Redux/YourRedux'
 
 // Styles
-import styles from './Styles/MyAddsScreenStyle'
+import styles from './Styles/MyAddsScreenStyles'
 
 class MyAddsScreen extends Component {
   render () {

@@ -16,8 +16,6 @@ export function* login(api, { email, password }) {
     password: password
   }
 
-  console.log("---------------inside login---------------------------")
-
   const response = yield call(api.login, authObj)
   if (response.ok) {
     yield call(api.setAuthToken, response.data.user.token)
@@ -26,8 +24,12 @@ export function* login(api, { email, password }) {
   else {
     yield put(AuthActions.loginFailure('WRONG'))
   }
-
 }
+
+export function* setUser(api, {user}) {
+  yield call(api.setAuthToken,user.token)
+}
+
 
 export function* register(api, { name, mobile, address, email, password }) {
   const authObj = {

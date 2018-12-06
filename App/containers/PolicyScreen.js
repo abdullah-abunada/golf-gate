@@ -5,7 +5,7 @@ import { ScrollView, Text, KeyboardAvoidingView } from 'react-native'
 // import YourActions from '../Redux/YourRedux'
 
 // Styles
-import styles from './Styles/PolicyScreenStyle'
+import styles from './Styles/ProfileScreenStyles'
 
 class PolicyScreen extends Component {
   render () {

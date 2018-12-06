@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types';
-import { View, Text } from 'react-native'
+import { View,Image } from 'react-native'
 import { Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right, Grid, Row, Col } from 'native-base';
+import { Rating } from 'react-native-elements'
 
-
+import { Metrics, Strings } from '../Themes'
 import styles from './Styles/AdsCardStyle'
 
 export default class AdsCard extends Component {
@@ -21,64 +22,71 @@ export default class AdsCard extends Component {
   render() {
     return (
 
-      <Card>
-        <CardItem>
-          <Left>
-            <Thumbnail source={{ uri: 'Image URL' }} />
-          </Left>
-          <Body>
-            <Grid>
-              <Row>
-                <Col>
+      <Card style={{ height: Metrics.screenHeigh/4,padding:10}}>
+        <View style={{ flex:1.5, flexDirection: 'row' }}>
 
-                </Col>
-                <Col>
 
-                </Col>
-              </Row>
-              <Row>
+          <View style={{ flex: 3,flexDirection:'column' }}>
+            <View style={{ flex: 1,flexDirection:'row'}}>
+              <Rating
+                imageSize={20}
+                readonly
+                startingValue={4}
+              />
+              <View style={{ flex: 3, flexDirection: 'row' }}>
+                <Text>{this.props.title}</Text>
+              </View>
+            </View>
 
-              </Row>
-            </Grid>
-          </Body>
-        </CardItem>
+            <View style={{ flex: 2, flexDirection: 'row' }}>
+                <Text>{this.props.description}</Text>
+            </View>
+          </View>
 
-        <CardItem>
-          <Left>
-            <Button transparent>
-              <Icon active name="thumbs-up" />
-              <Text>12 Likes</Text>
+
+          <View style={{ flex: 1 }}>
+          <Image  style={{flex: 1,width:null}}
+              source={{ uri: this.props.image }}/>
+          </View>
+
+
+        </View>
+
+        <View style={{ flex: 1 }}>
+          <View style={{ flex: 1, flexDirection: 'row'}}>
+          <View style={{ flex: 3 ,justifyContent:'flex-end' }}>
+              <Text>Algeria{this.props.address}</Text>
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text>{Strings.ar.address}</Text>
+            </View>
+          </View>
+          <View style={{ flex: 1, flexDirection: 'row' }}>
+          <View style={{ flex: 3 ,justifyContent:'flex-end' }}>
+              <Text>{this.props.price}</Text>
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text>{Strings.ar.price}</Text>
+            </View>
+
+          </View>
+        </View>
+
+        <View style={{ flex: 1 ,flexDirection:'row'}}>
+          <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-start', marginRight: 10 }}>
+            <Button >
+            <Text>{Strings.ar.report}</Text>
             </Button>
-          </Left>
-          <Body>
-            <Button transparent>
+            <Button >
               <Icon active name="chatbubbles" />
-              <Text>4 Comments</Text>
             </Button>
-          </Body>
-          <Right>
-            <Text>11h ago</Text>
-          </Right>
-        </CardItem>
-
-
-        <CardItem>
-          <Left>
-            <Button transparent>
-              <Icon active name="thumbs-up" />
-              <Text>12 Likes</Text>
+          </View>
+          <View style={{ flex: 1,flexDirection:'row', justifyContent: 'flex-end' }}>
+            <Button success>
+              <Text>{Strings.ar.call}</Text>
             </Button>
-          </Left>
-          <Body>
-            <Button transparent>
-              <Icon active name="chatbubbles" />
-              <Text>4 Comments</Text>
-            </Button>
-          </Body>
-          <Right>
-            <Text>11h ago</Text>
-          </Right>
-        </CardItem>
+          </View>
+        </View>
       </Card>
     )
   }

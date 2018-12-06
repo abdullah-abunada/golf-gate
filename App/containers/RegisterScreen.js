@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 
 import { Metrics, Strings, Colors } from '../Themes'
 // Styles
-import styles from './Styles/RegisterScreenStyle'
+import styles from './Styles/RegisterScreenStyles'
 
 class RegisterScreen extends Component {
 

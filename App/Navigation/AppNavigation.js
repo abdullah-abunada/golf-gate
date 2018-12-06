@@ -3,7 +3,6 @@ import { createStackNavigator, createDrawerNavigator, createSwitchNavigator ,cre
 
 
 //screens
-
 import RegisterScreen from '../containers/RegisterScreen';
 import LoginScreen from '../containers/LoginScreen';
 
@@ -16,10 +15,12 @@ import ProfileScreen from '../containers/ProfileScreen';
 import PolicyScreen from '../containers/PolicyScreen';
 import AddAdScreen from '../containers/AddAdScreen';
 import MyAddsScreen from '../containers/MyAddsScreen';
+
+//
 import ContactScreen from '../containers/ContactScreen';
 
 //styles
-import styles from './Styles/NavigationContainerStyles'
+import styles from './Styles/NavigationContainerStyles';
 
 
 //drawer content
@@ -38,11 +39,16 @@ const HomeStack = createStackNavigator(
         SectionScreen: { screen: SectionScreen }
 
     }, {
-        navigationOptions: {
-            initialRouteName: 'MainScreen',
-            headerMode: 'screen'
-        }
+        defaultNavigationOptions: {
+        headerStyle: styles.header,
+        headerTitleStyle: styles.title,
+        headerRightContainerStyle:styles.iconContainer,
+        headerTitleContainerStyle:styles.headerContainer
+        },
+        initialRouteName: 'MainScreen',
+        headerMode: 'screen'
     });
+
 
 const AuthStack = createStackNavigator({
     LoginScreen: { screen: LoginScreen },
@@ -50,30 +56,47 @@ const AuthStack = createStackNavigator({
 }, {
         // Default config for all screens
         headerMode: 'none',
-        initialRouteName: 'LoginScreen',
-        navigationOptions: {
-            headerStyle: styles.header
-        }
+        initialRouteName: 'LoginScreen'     
     })
 
 const AppStack = createDrawerNavigator(
     {
-        HomeScreen: { screen: HomeScreen },
+        HomeScreen: createStackNavigator({ screen: HomeScreen },{defaultNavigationOptions: {
+            headerStyle: styles.header,
+            headerTitleStyle: styles.title,
+            headerRightContainerStyle:styles.iconContainer,
+            headerTitleContainerStyle:styles.headerContainer}}),
         HomeStack: { screen: HomeStack },
-        ProfileScreen: { screen: ProfileScreen }, 
-        AddAdScreen: { screen: AddAdScreen },
-        MyAddsScreen: { screen: MyAddsScreen },        
-        PolicyScreen: { screen: PolicyScreen },
-        ContactScreen: { screen: ContactScreen }
+        ProfileScreen:createStackNavigator ({ screen: ProfileScreen }, {defaultNavigationOptions: {
+            headerStyle: styles.header,
+            headerTitleStyle: styles.title,
+            headerRightContainerStyle:styles.iconContainer,
+            headerTitleContainerStyle:styles.headerContainer}}), 
+        AddAdScreen: createStackNavigator({ screen: AddAdScreen },{defaultNavigationOptions: {
+            headerStyle: styles.header,
+            headerTitleStyle: styles.title,
+            headerRightContainerStyle:styles.iconContainer,
+            headerTitleContainerStyle:styles.headerContainer}}),
+        MyAddsScreen: createStackNavigator({ screen: MyAddsScreen},{defaultNavigationOptions: {
+            headerStyle: styles.header,
+            headerTitleStyle: styles.title,
+            headerRightContainerStyle:styles.iconContainer,
+            headerTitleContainerStyle:styles.headerContainer}}),        
+        PolicyScreen:createStackNavigator ({ screen: PolicyScreen },{defaultNavigationOptions: {
+            headerStyle: styles.header,
+            headerTitleStyle: styles.title,
+            headerRightContainerStyle:styles.iconContainer,
+            headerTitleContainerStyle:styles.headerContainer}}),
+        ContactScreen: createStackNavigator({ screen: ContactScreen},{defaultNavigationOptions: {
+            headerStyle: styles.header,
+            headerTitleStyle: styles.title,
+            headerRightContainerStyle:styles.iconContainer,
+            headerTitleContainerStyle:styles.headerContainer}})
     },
     {
          //contentComponent: props => <SideDrawer/>,
-         initialRouteName: 'HomeStack',
-         headerMode: 'screen',
-         drawerPosition :'right',
-         navigationOptions: {
-             //headerStyle: styles.header
-         }
+         initialRouteName: 'HomeScreen',
+         drawerPosition :'right'
     }
 );
 
@@ -91,4 +114,4 @@ const PrimaryNav = createSwitchNavigator(
 );
 
 
-export default createAppContainer(PrimaryNav);
+export default createAppContainer(PrimaryNav)

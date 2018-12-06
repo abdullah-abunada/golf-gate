@@ -1,27 +1,37 @@
 import React, { Component } from 'react'
 import { View, FlatList, Text, KeyboardAvoidingView } from 'react-native'
 import { Button } from 'react-native-elements'
-
+import {BarIndicator} from 'react-native-indicators'
+import {Icon} from 'native-base'
 
 import CategoriesAction from '../Redux/CategoriesRedux'
 import { connect } from "react-redux";
 
-
+ 
 // Styles
-import styles from './Styles/MainScreenStyle'
+import { Metrics, Strings, Colors } from '../Themes'
+import styles from './Styles/MainScreenStyles'
 
 class MainScreen extends Component {
 
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: Strings.ar.email,
+      headerRight: (<Icon name='swap' onPress={()=>navigation.openDrawer()}/>)
+    };
+  };
 
   componentWillMount() {
-    //  this.props.categoriesRequest()
+   this.props.categoriesRequest()
   }
 
   renderRow({ item }) {
     return (
-      <View key={item.id} style={{ justifyContent: 'center', alignItems: 'center' }}>
-        <Text>{item.name}</Text>
-      </View>
+      <Button
+      large
+      key={item.id}
+      title={item.name}
+      onPress={() => this.props.navigation.navigate("SectionScreen",{cat_id:item.id})} />
     )
   }
 
@@ -38,12 +48,14 @@ class MainScreen extends Component {
 
 
   renderContent = () => {
-    //if (true)
+    if (this.props.fetching) {
+      return <BarIndicator color={Colors.grey} count={5}/>;
+    }
     return (
       <FlatList
         contentContainerStyle={styles.listContent}
         data={this.props.categories}
-        renderItem={this.renderRow}
+        renderItem={this.renderRow.bind(this)}
         numColumns={1}
         keyExtractor={this.keyExtractor}
         initialNumToRender={this.oneScreensWorth}
@@ -53,6 +65,11 @@ class MainScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
+         <Button
+          large
+          rightIcon={{ name: 'code' }}
+          title='LARGE WITH RIGHT ICON'
+          onPress={() => this.props.navigation.navigate("SectionScreen")} />
         {this.renderContent()}
       </View>
     )

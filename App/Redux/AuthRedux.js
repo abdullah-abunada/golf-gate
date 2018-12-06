@@ -20,6 +20,13 @@ const { Types, Creators } = createActions({
 export const AuthTypes = Types
 export default Creators
 
+/* ------------- Selectors ------------- */
+
+export const AuthSelectors = {
+  getUser: state => state.user
+}
+
+
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
@@ -32,11 +39,11 @@ export const INITIAL_STATE = Immutable({
   error:"null",
   user:{
     user_id: 19,
-    name: "",
-    email: "",
-    mobile: "",
-    image: null,
-    address: "",
+    name: "wassim",
+    email: "ew_hennoune@esi.dz",
+    mobile: "0697961213",
+    image:  'https://assets.entrepreneur.com/content/3x2/2000/20150406145944-dos-donts-taking-perfect-linkedin-profile-picture-selfie-mobile-camera-2.jpeg?width=700&crop=2:1',
+    address: "takbou, médéa",
     active: 0,
     token: "a1e5a4476077e1210d8f14c5eb298d8604ef19841543495800"
   }
@@ -46,7 +53,6 @@ export const INITIAL_STATE = Immutable({
 
 //handle input changes
 export const handleInput = (state,{prop,value}) => state.merge({ [prop]:value })
-
 //setUser
 export const setUser = (state,{user}) => state.merge({ user })
 
