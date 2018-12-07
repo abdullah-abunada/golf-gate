@@ -1,3 +1,4 @@
+import ProfileScreen from "../containers/ProfileScreen";
 
 
 export default Strings ={
@@ -12,6 +13,7 @@ export default Strings ={
         forgetPassword: 'نسيت كلمة المرور',
         email: 'البريد الالكتروني',
         password: 'كلمة المرور',
+        verify_password:'اعد كلمة المرور ',
         address:'العنوان',
         price : 'السعر',
         errorLoginMessage: 'خطأ في الاسم او كلمة المرور الرجاء المحاوله مره اخرى',
@@ -34,7 +36,18 @@ export default Strings ={
         call : 'اتصال',
         report :'بلاغ',
         message :'الرسالة',
-        subject :'الموضوع'
+        subject :'الموضوع',
+        logout:'خروج',
+        send:'ارسال',
+        //ScreensTitle:
+        ProfileScreen:'الصفحة الشخصية',
+        MainScreen:'الصفحة الرئيسية',
+        HomeScreen:'الصفحة الشخصية',
+        PolicyScreen:'شروط الخصوصية',
+        myAds:'اعلاناتي',
+        addAd :'اضف اعلان',
+        policy:`Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in feugiat dolor. Cras maximus lacus in tellus vulputate lobortis. Aenean sodales nulla sed sodales sagittis. Praesent ut neque magna. Mauris vel est nec ipsum fermentum ornare eget a nulla. Quisque molestie lectus purus. Cras gravida ligula eget felis convallis, et dapibus turpis faucibus. Praesent suscipit ultricies arcu, ut ultrices sapien dapibus ac. Sed neque diam, faucibus a erat eu, interdum suscipit mi. Proin rhoncus posuere ligula.
+        Donec eget mi ante. Ut ac arcu scelerisque neque convallis feugiat sed dapibus lorem. Proin ut dui eu urna facilisis congue quis non neque. Aenean ligula nunc, semper sit amet quam in, dignissim blandit sem. Duis ac dui ligula. Donec sed justo commodo, accumsan quam condimentum, consequat nisl. Praesent vitae feugiat sem. Donec bibendum, nisi in venenatis posuere, eros dui eleifend est, eu tristique tellus orci sit amet ipsum. Donec rhoncus iaculis ex, vehicula ornare ipsum commodo sit amet. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin non arcu sed nulla dictum sollicitudin. Cras convallis condimentum massa ut tempor. Fusce volutpat odio mi, ac mollis enim mattis ut. Sed commodo convallis dictum. Phasellus fringilla venenatis ex, tristique laoreet metus rhoncus nec. Nunc quis tristique ex, a rhoncus augue.`
 
     }
 };

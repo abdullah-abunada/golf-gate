@@ -1,16 +1,23 @@
 import React, { Component } from 'react'
 import { View, Text, Image, AsyncStorage ,FlatList} from 'react-native'
 import { Button } from 'react-native-elements'
+import {Icon} from 'native-base'
 
 import AuthActions from '../Redux/AuthRedux'
 import { connect } from "react-redux";
 
 
 import styles from './Styles/HomeScreenStyles'
-import {Metrics,Colors} from '../Themes'
+import {Metrics,Colors,Strings} from '../Themes'
 
 class HomeScreen extends Component {
 
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: Strings.ar.HomeScreen,
+      headerRight: (<Icon name='menu'style={{ color: Colors.white}} onPress={()=>navigation.openDrawer()}/>)
+    };
+  };
 
   async componentWillMount() {
     const user = await AsyncStorage.getItem('user')
@@ -55,12 +62,6 @@ class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>{this.props.user.name}</Text>
-        <Button
-          large
-          rightIcon={{ name: 'code' }}
-          title='LARGE WITH RIGHT ICON'
-          onPress={() => this.props.logout(user.token)} />
         <FlatList
           contentContainerStyle={styles.listContent}
           data={this.state.dataObjects}
@@ -84,8 +85,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setUser: (value) => dispatch(AuthActions.setUser(value)),
-    logout: (token) => dispatch(AuthActions.logout(token)),
+    setUser: (value) => dispatch(AuthActions.setUser(value))
   }
 }
 

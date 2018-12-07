@@ -19,6 +19,12 @@ import styles from './Styles/AddAdScreenStyles'
 
 class AddAdScreen extends Component {
 
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: Strings.ar.addAd,
+      headerRight: (<Icon name='menu'style={{ color: Colors.white}} onPress={()=>navigation.openDrawer()}/>)
+    };
+  };
 
   componentWillMount() {
     this.props.citiesRequest()
@@ -50,7 +56,6 @@ class AddAdScreen extends Component {
   }
 
   onCategorieChanged = (key) => {
-    console.warn(key)
     this.props.subCategoriesRequest(key)
     this.props.handleInput('addCategoryId', key)
   }
@@ -168,6 +173,7 @@ class AddAdScreen extends Component {
 
 
   //pickImage
+
   _pickImage = async () => {
     const {
       status: cameraRollPerm

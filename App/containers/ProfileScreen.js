@@ -5,30 +5,38 @@ import {  } from 'react-native-elements'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
-import { Colors } from '../Themes'
+import { Colors,Images,Fonts} from '../Themes'
 // Styles
 import styles from './Styles/ProfileScreenStyles'
 
 class ProfileScreen extends Component {
 
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: Strings.ar.ProfileScreen,
+      headerRight: (<Icon name='menu'style={{ color: Colors.white}} onPress={()=>navigation.openDrawer()}/>)
+    };
+  };
+
   renderForm = () => {
     return (
-      <View style={{ flex: 2, justifyContent: 'center' }}>
+      <View style={{ flex: 2, justifyContent: 'center',padding:10}}>
         <View style={styles.nameContainer}>
-          <Text>{this.props.user.name}</Text>
+          <Text style={{...Fonts.type.h3}}>{this.props.user.name}</Text>
 
         </View>
         <View style={styles.iContainer}>
           <Text>{this.props.user.address}</Text>
-          <Icon name='swap' />
+          <Icon name='map-marker' type="MaterialCommunityIcons" style={{color:Colors.green,marginLeft:10}}/>
         </View>
         <View style={styles.iContainer}>
           <Text>{this.props.user.mobile}</Text>
-          <Icon name='swap' />
+          <Icon name='phone' type="MaterialCommunityIcons" style={{color:Colors.green,marginLeft:10}}/>
         </View>
         <View style={styles.iContainer}>
           <Text>{this.props.user.email}</Text>
-          <Icon name='swap' />
+          <Icon name='email'type="MaterialCommunityIcons" style={{color:Colors.green,marginLeft:10}} />
         </View>
       </View>
     )
@@ -40,7 +48,7 @@ class ProfileScreen extends Component {
       <View style={{flex:1}}>
         <View style={{ flex: 2,backgroundColor:Colors.green}}>
           <Image style={{ flex: 1, width: null,height:500 }}
-            source={{ uri: this.props.user.image }} />
+           source={this.props.user.image ? { uri: this.props.user.image } : Images.defaultProfile} />
         </View>
         {this.renderForm()}
         <View style={{ flex: 1 }}>

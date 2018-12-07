@@ -87,7 +87,6 @@ export const addAdSuccess = (state, action) => {
 
 export const addAdFailure = (state, action) => {
   const { message } = action
-  console.warn(message)
   return state.merge({ fetching: false, error:message })
 }
 

@@ -5,64 +5,72 @@ import { Container, Content, Button, Icon, Text, Form, Item, Input, Label,Thumbn
 
 import AuthActions from '../Redux/AuthRedux'
 import { connect } from "react-redux";
+import {BarIndicator} from 'react-native-indicators'
 
-
-import { Colors, Strings, Metrics,Images } from '../Themes'
+import { Fonts, Strings,Images,Colors } from '../Themes'
 // Styles
-import styles from './Styles/LoginScreenStyles'
+import styles from './Styles/AddAdScreenStyles'
 
 class LoginScreen extends Component {
+
+  static navigationOptions = {
+    header : null
+  }
+  
+  renderContent = () => {
+    if (this.props.fetching) {
+      return <BarIndicator color={Colors.grey} count={5}/>;
+    }
+    return (
+      <View style={{ flex: 2, justifyContent: 'space-around'}}>
+
+          
+      <Item regular  style={styles.inputContainer} >
+        <Input placeholder={Strings.ar.email} textBox
+        onChangeText={(value) => { this.props.handleInput('email', value) }}
+        value={this.props.email} />
+      </Item>
+      <Item regular  style={styles.inputContainer} >
+        <Input placeholder={Strings.ar.password} textBox
+        onChangeText={(value) => { this.props.handleInput('password', value) }}
+        value={this.props.password} />
+      </Item>
+    
+      <Text style={{...Fonts.style.description,color:'red',alignSelf:'center'}}>{this.props.error}</Text>
+
+      <Button  full dark onPress={this.handleLogin}>
+        <Text style={{...Fonts.style.h5}}>{Strings.ar.login}</Text>
+      </Button>
+
+     
+      <Button full transparent dark onPress={() => this.props.navigation.navigate("RegisterScreen")}>
+        <Text style={{...Fonts.style.h5,color:'black'}}>{Strings.ar.signup}</Text>
+      </Button>
+     
+    </View>
+    )
+  }
+
+  handleLogin =()=>{
+    const {email,password} = this.props
+    if(email!='' && password!='')
+    this.props.attemptLogin(this.props.email, this.props.password)
+    else this.props.handleInput('error',Strings.ar.errorLoginMessage)
+  }
+
   render() {
     return (
 
       <View style={styles.container}>
         
 
-          <View style={{ flex: 1, backgroundColor: '#987946' }}>
-          <Text style={{color:Colors.grey}} >{this.props.authToken}</Text>
-          <Text style={{color:Colors.grey}} >{this.props.error}</Text>
-          </View>
-
-
+          <View style={{ flex: 1}}/>
+         
 
           <View style={{ flex: 1, justifyContent: 'center',alignItems:'center' }}>
-            <Thumbnail square large source={Images.logo} />
+            <Thumbnail  style={{width:200, height:75}} source={Images.logo} />
           </View>
-
-
-          <View style={{ flex: 2, justifyContent: 'space-around' }}>
-
-            <Item regular>
-              <Input placeholder={Strings.ar.email} textBox
-              onChangeText={(value) => { this.props.handleInput('email', value) }}
-              value={this.props.email} />
-              <Icon name='swap' />
-            </Item>
-            <Item regular>
-              <Input placeholder={Strings.ar.password} textBox
-              onChangeText={(value) => { this.props.handleInput('password', value) }}
-              value={this.props.password} />
-              <Icon name='swap' />
-            </Item>
-
-
-            <Button small  transparent full onPress={() => this.props.navigation.navigate("RegisterScreen")}>
-              <Text style={{color:Colors.grey}} >{Strings.ar.forgetPassword}</Text>
-            </Button>
-          
-            <Button  full color={Colors.black} onPress={()=> this.props.attemptLogin(this.props.email, this.props.password)}>
-              <Text style={{color:Colors.white}}>{Strings.ar.login}</Text>
-              <Icon name='home' />
-            </Button>
-
-           
-            <Button full transparent>
-              <Text style={{color:Colors.dark}}>{Strings.ar.signup}</Text>
-              <Icon name='home' color={Colors.dark} />
-            </Button>
-           
-          </View>
-
+ {this.renderContent()}     
         </View>
 
 

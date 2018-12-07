@@ -8,10 +8,10 @@ const { Types, Creators } = createActions({
   handleInput : ['prop','value'],
   setUser: ['user'],
   loginRequest: ['email', 'password'],
-  registerRequest: ['name','mobile','address','email', 'password'],
+  registerRequest: ['name','mobile','address','email', 'password','image'],
   loginSuccess: ['authToken'],
   loginFailure: ['error'],
-  logout: ['token'],
+  logout: [],
   logoutSuccess: [],
   logoutFailure: ['error'],
 
@@ -30,22 +30,23 @@ export const AuthSelectors = {
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  email:'wassim@wassim.com',
-  password :'123456',
-  mobile:'0000000',
-  address:'riyadh, KSA',
-  name:'mohamed',
+  email:'',
+  password :'',
+  mobile:'',
+  address:'',
+  name:'',
+  image:null,
   fetching:false,
-  error:"null",
+  error:'',
   user:{
-    user_id: 19,
-    name: "wassim",
-    email: "ew_hennoune@esi.dz",
-    mobile: "0697961213",
-    image:  'https://assets.entrepreneur.com/content/3x2/2000/20150406145944-dos-donts-taking-perfect-linkedin-profile-picture-selfie-mobile-camera-2.jpeg?width=700&crop=2:1',
-    address: "takbou, médéa",
-    active: 0,
-    token: "a1e5a4476077e1210d8f14c5eb298d8604ef19841543495800"
+    user_id: null,
+    name: null,
+    email:null,
+    mobile: null,
+    image:  null,
+    address: null,
+    active: null,
+    token:null
   }
 });
 
@@ -61,13 +62,23 @@ export const request = (state) => state.merge({ fetching: true })
 
 // we've successfully logged in
 export const success =  (state, data) => {
+  console.warn(data.authToken)
   AsyncStorage.setItem('user',JSON.stringify(data.authToken)).then(()=>Navigator.navigate("HomeScreen"))
   return   state.merge({ fetching: false, error: null, user:data.authToken })
 }
 
 export const logoutSuccess =  (state) => {
   AsyncStorage.removeItem('user').then(()=>Navigator.navigate("LoginScreen"))
-  return   state.merge({ fetching: false, error: null, user:null })
+  return   state.merge({ fetching: false, error: null, user:{
+    user_id: null,
+    name: null,
+    email:null,
+    mobile: null,
+    image:  null,
+    address: null,
+    active: null,
+    token:null
+  } })
 }
 
 // we've had a problem logging in

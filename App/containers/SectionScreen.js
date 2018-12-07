@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, FlatList, Text } from 'react-native'
+import {Icon} from 'native-base'
 import { Button } from 'react-native-elements'
 import {BarIndicator} from 'react-native-indicators'
 
@@ -13,16 +14,25 @@ import { Metrics, Strings, Colors } from '../Themes'
 
 class SectionScreen extends Component {
 
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: navigation.getParam('cat_name'),
+      headerRight: (<Icon name='menu'style={{ color: Colors.white}} onPress={()=>navigation.openDrawer()}/>)
+    };
+  };
+
   componentWillMount() {
-    console.warn("mount")
       this.props.subCategoriesRequest(this.props.navigation.getParam('cat_id'))
     }
   
     renderRow({ item }) {
       return (
-        <View key={item.sub_category_id} style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Text>{item.sub_category}</Text>
-        </View>
+
+          <Button
+          large
+          key={item.sub_category_id}
+          title={item.sub_category}
+          onPress={() => this.props.navigation.navigate("AdsDetailsScreen",{sub_cat_id:item.sub_category_id,sub_cat:item.sub_category})}  />
       )
     }
   
@@ -46,7 +56,7 @@ class SectionScreen extends Component {
           <FlatList
             contentContainerStyle={styles.listContent}
             data={this.props.subCategories}
-            renderItem={this.renderRow}
+            renderItem={this.renderRow.bind(this)}
             numColumns={1}
             keyExtractor={this.keyExtractor}
             initialNumToRender={this.oneScreensWorth}

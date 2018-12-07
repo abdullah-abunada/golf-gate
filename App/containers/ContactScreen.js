@@ -1,75 +1,82 @@
 import React, { Component } from 'react'
 import { ScrollView, View } from 'react-native'
 
-import { Icon, Input, Item,Text} from 'native-base'
+import { Icon, Input, Item, Text,Button } from 'native-base'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { Button } from 'react-native-elements'
-import {BarIndicator} from 'react-native-indicators'
+import { BarIndicator } from 'react-native-indicators'
 
 import ContactActions from '../Redux/ContactRedux'
 import { connect } from "react-redux";
 
 
-import { Metrics, Strings, Colors } from '../Themes'
+import { Fonts,Strings, Colors } from '../Themes'
 
 // Styles
-import styles from './Styles/ContactScreenStyles'
+import styles from './Styles/AddAdScreenStyles'
 
 class ContactScreen extends Component {
 
-    static navigationOptions = {
-      title: Strings.ar.contactUs,
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: Strings.ar.contactUs,
+      headerRight: (<Icon name='menu' style={{ color: Colors.white }} onPress={() => navigation.openDrawer()} />)
     };
+  };
 
 
-    renderContent = () => {
-      if (this.props.fetching) {
-        return <BarIndicator color={Colors.grey} count={5}/>;
-      }
-      return (
-        <Button
-        large
-        onPress={()=>this.props.contactRequest(this.props.subject,this.props.message)} />
-      )
+  handleLogin =()=>{
+    const {subject,message} = this.props
+    if(subject!=''&& message!='')
+    this.props.contactRequest(subject, message)
+    else this.props.handleInput('error','Strings.ar.errorLoginMessage')
+  }
+
+  renderContent = () => {
+    if (this.props.fetching) {
+      return <BarIndicator color={Colors.grey} count={5} />;
     }
+    return (
+      <View style={{ flex: 1 }}>
+      <View style={{ flex: 4 }}>
+        <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.subject}</Text>
+        <Item regular  style={styles.inputContainer} >
+          <Input placeholder={Strings.ar.subject} textBox
+            onChangeText={(value) => { this.props.handleInput('subject', value) }}
+            value={this.props.subject} />
+        </Item>
+        <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.message}</Text>
+        <Item regular  style={styles.inputContainer} >
+          <Input placeholder={Strings.ar.message} textBox
+            style={{ height: 250 }}
+            onChangeText={(value) => { this.props.handleInput('message', value) }}
+            value={this.props.message}
+            multiline />
+        </Item>
+        <Text style={{...Fonts.style.description,color:'red',alignSelf:'center'}}>message{this.props.error}</Text>
+      </View>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Button full dark onPress={this.handleSend}>
+          <Text style={{ ...Fonts.style.h5,color:'white' }}>{Strings.ar.send}</Text>
+        </Button>     
+      </View>
+    </View>
+    )
+  }
   render() {
     return (
 
       <KeyboardAwareScrollView style={styles.container} enableOnAndroid>
-        <View style={{ height: Metrics.screenHeight }}>
-          <View style={{ flex: 4 }}>
-          <Text>{Strings.ar.subject}</Text>
-            <Item regular>
-              <Input placeholder={Strings.ar.subject} textBox
-                onChangeText={(value) => { this.props.handleInput('subject', value) }}
-                value={this.props.subject} />
-              <Icon name='swap' />
-            </Item>
-            <Text>{Strings.ar.message}</Text>
-            <Item regular>
-              <Input placeholder={Strings.ar.message} textBox
-                style={{height:300}}
-                onChangeText={(value) => { this.props.handleInput('message', value) }}
-                value={this.props.message}
-                multiline />
-              <Icon name='swap' />
-            </Item>
-
-          </View>
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            {this.renderContent()}
-          </View>
-        </View>
+        {this.renderContent()}
       </KeyboardAwareScrollView>
 
     )
   }
 }
 
-const mapStateToProps = ({contact}) => {
-  const {message,subject,fetching} = contact
+const mapStateToProps = ({ contact }) => {
+  const { message, subject, fetching,error } = contact
   return {
-    subject,message,fetching
+    subject, message, fetching,error
   }
 }
 

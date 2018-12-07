@@ -1,7 +1,7 @@
 import { call, put, select } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import AuthActions from '../Redux/AuthRedux'
-import { AsyncStorage } from 'react-native'
+
 
 
 
@@ -31,18 +31,18 @@ export function* setUser(api, {user}) {
 }
 
 
-export function* register(api, { name, mobile, address, email, password }) {
+export function* register(api, { name, mobile, address, email, password,image }) {
   const authObj = {
     name: name,
     mobile: mobile,
     address: address,
     email: email,
-    password: password
+    password: password,
+    image:image
   }
 
   const response = yield call(api.register, authObj)
   if (response.ok) {
-    console.log(response.data.user)
     yield put(AuthActions.loginSuccess(response.data.user))
   }
   else {
@@ -53,12 +53,11 @@ export function* register(api, { name, mobile, address, email, password }) {
 
 
 // attempts to logout
-export function* logout(api,{token}) {
+export function* logout(api,{}) {
 
   const response = yield call(api.logout)
-  console.warn(response)
   if (response.ok) {
-    yield call(api.removeAuthToken,token)
+    yield call(api.removeAuthToken)
     yield put(AuthActions.logoutSuccess())
   }
   else{

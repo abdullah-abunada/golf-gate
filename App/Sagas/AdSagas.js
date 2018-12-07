@@ -27,9 +27,7 @@ export function * addAd (api, {addContent,user_id}) {
   const response = yield call(api.addAd,obj)
   
   // success?
-  console.warn(response.ok)
   if (response.ok) {
-    console.warn(response.data.success)
     if(response.data.success)  {
          yield put(AdActions.addAdSuccess())
     }

@@ -9,15 +9,15 @@ import { connect } from "react-redux";
 
  
 // Styles
-import { Metrics, Strings, Colors } from '../Themes'
+import {  Strings, Colors } from '../Themes'
 import styles from './Styles/MainScreenStyles'
 
 class MainScreen extends Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: Strings.ar.email,
-      headerRight: (<Icon name='swap' onPress={()=>navigation.openDrawer()}/>)
+      headerTitle: Strings.ar.MainScreen,
+      headerRight: (<Icon name='menu' style={{ color: Colors.white}} onPress={()=>navigation.openDrawer()}/>)
     };
   };
 
@@ -31,7 +31,7 @@ class MainScreen extends Component {
       large
       key={item.id}
       title={item.name}
-      onPress={() => this.props.navigation.navigate("SectionScreen",{cat_id:item.id})} />
+      onPress={() => this.props.navigation.navigate("SectionScreen",{cat_id:item.id,cat_name:item.name})} />
     )
   }
 
@@ -65,11 +65,6 @@ class MainScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-         <Button
-          large
-          rightIcon={{ name: 'code' }}
-          title='LARGE WITH RIGHT ICON'
-          onPress={() => this.props.navigation.navigate("SectionScreen")} />
         {this.renderContent()}
       </View>
     )

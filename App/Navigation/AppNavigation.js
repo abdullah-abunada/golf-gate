@@ -24,7 +24,7 @@ import styles from './Styles/NavigationContainerStyles';
 
 
 //drawer content
-//import SideDrawer from "../Components/SideDrawer";
+import SideDrawer from "../components/SideDrawer";
 
 
 
@@ -46,7 +46,7 @@ const HomeStack = createStackNavigator(
         headerTitleContainerStyle:styles.headerContainer
         },
         initialRouteName: 'MainScreen',
-        headerMode: 'screen'
+        headerMode: 'float'
     });
 
 
@@ -55,8 +55,8 @@ const AuthStack = createStackNavigator({
     RegisterScreen: { screen: RegisterScreen }
 }, {
         // Default config for all screens
-        headerMode: 'none',
-        initialRouteName: 'LoginScreen'     
+        initialRouteName: 'LoginScreen',
+        headerMode:'screen'   
     })
 
 const AppStack = createDrawerNavigator(
@@ -67,7 +67,7 @@ const AppStack = createDrawerNavigator(
             headerRightContainerStyle:styles.iconContainer,
             headerTitleContainerStyle:styles.headerContainer}}),
         HomeStack: { screen: HomeStack },
-        ProfileScreen:createStackNavigator ({ screen: ProfileScreen }, {defaultNavigationOptions: {
+        ProfileScreen:createStackNavigator ({ screen: ProfileScreen },{defaultNavigationOptions: {
             headerStyle: styles.header,
             headerTitleStyle: styles.title,
             headerRightContainerStyle:styles.iconContainer,
@@ -94,7 +94,7 @@ const AppStack = createDrawerNavigator(
             headerTitleContainerStyle:styles.headerContainer}})
     },
     {
-         //contentComponent: props => <SideDrawer/>,
+         contentComponent: props => <SideDrawer/>,
          initialRouteName: 'HomeScreen',
          drawerPosition :'right'
     }

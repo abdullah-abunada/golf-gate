@@ -9,7 +9,7 @@ import { ContactTypes } from '../Redux/ContactRedux'
 // ignite-jhipster-saga-redux-import-needle
 
 /* ------------- Sagas ------------- */
-import {login,register,setUser} from './AuthSaga'
+import {login,register,setUser,logout} from './AuthSaga'
 import {getCategories,getSubCategories,getCities} from './CategoriesSagas'
 import {addAd} from './AdSagas'
 import {contactUs} from './ContactSagas'
@@ -27,6 +27,7 @@ export default function * root () {
   yield all([
     // some sagas only receive an action
     takeEvery(AuthTypes.LOGIN_REQUEST, login, api),
+    takeEvery(AuthTypes.LOGOUT, logout, api),
     takeEvery(AuthTypes.REGISTER_REQUEST, register, api),
     takeEvery(AuthTypes.SET_USER, setUser, api),
     takeEvery(CategoriesTypes.CATEGORIES_REQUEST, getCategories, api),

@@ -16,12 +16,12 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  message :'this is a contact us message',
-  subject :'this is a contact us subject',
+  message :'',
+  subject :'',
   data: null,
   fetching: null,
   payload: null,
-  error: null
+  error: ""
 })
 
 /* ------------- Selectors ------------- */
