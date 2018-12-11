@@ -13,7 +13,7 @@ import AdAction from '../Redux/AdRedux'
 import { connect } from "react-redux";
 
 
-import { Metrics, Strings, Colors } from '../Themes'
+import { Strings, Colors } from '../Themes'
 // Styles
 import styles from './Styles/AddAdScreenStyles'
 
@@ -22,9 +22,13 @@ class AddAdScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: Strings.ar.addAd,
-      headerRight: (<Icon name='menu'style={{ color: Colors.white}} onPress={()=>navigation.openDrawer()}/>)
+      headerRight: (<Icon name='menu' style={{ color: Colors.white }} onPress={() => navigation.openDrawer()} />)
     };
   };
+
+  state={
+    image : null
+  }
 
   componentWillMount() {
     this.props.citiesRequest()
@@ -102,63 +106,57 @@ class AddAdScreen extends Component {
           <Input placeholder={Strings.ar.address} textBox
             onChangeText={(value) => this.props.handleInput('address', value)}
             value={this.props.addContent.address} />
-          <Icon name='swap' />
         </Item>
 
         <Item regular style={styles.inputContainer}>
           <Input placeholder={Strings.ar.title} textBox
             onChangeText={(value) => this.props.handleInput('title', value)}
             value={this.props.addContent.title} />
-          <Icon name='swap' />
         </Item>
 
         <Item regular style={styles.inputContainer}>
           <Input placeholder={Strings.ar.price} textBox
             onChangeText={(value) => this.props.handleInput('price', value)}
             value={this.props.addContent.price} />
-          <Icon name='swap' />
         </Item>
 
         <Item regular style={styles.inputContainer}>
           <Input style={styles.inputContainer} placeholder={Strings.ar.mobile} textBox
             onChangeText={(value) => this.props.handleInput('phone', value)}
             value={this.props.addContent.mobile} />
-          <Icon name='swap' />
         </Item>
 
         <Item regular style={styles.inputContainer}>
           <Input placeholder={Strings.ar.whatsapp} textBox
             onChangeText={(value) => this.props.handleInput('whatsapp', value)}
             value={this.props.addContent.whatsapp} />
-          <Icon name='swap' />
         </Item>
 
         <Item regular style={styles.inputContainer}>
           <Input placeholder={Strings.ar.description} textBox
             onChangeText={(value) => this.props.handleInput('description', value)}
             value={this.props.addContent.description} />
-          <Icon name='swap' />
         </Item>
 
 
 
-        <Button
-          large
-          buttonStyle={styles.transparentButton}
-          title={Strings.ar.uploadImage}
-          onPress={this._pickImage}
-        />
-        {this.props.addContent.image &&
-          <Image source={{ uri: this.props.addContent.image }} style={{ width: 200, height: 200 }} />}
+        <Button full dark transparent onPress={this._pickImage}>
+          <Text style={{ ...Fonts.style.h5, color: 'black' }}>{Strings.ar.uploadImage}</Text>
+          <Icon name='camera' style={{ color: Colors.black }} />
+        </Button>
+        {this.state.image
+          && <Image
+            source={{ uri: this.state.image }}
+            style={{ width: 50, height: 50, alignSelf: 'center' }}
+          />
+        }
 
         <Text style={styles.error}>{this.props.error}</Text>
 
         <Text style={styles.success}>{this.props.success}</Text>
-        <Button
-          large
-          buttonStyle={styles.submitButton}
-          title={'submit'}
-          onPress={() => this.props.addAdRequest(this.props.addContent, this.props.user_id)} />
+        <Button full dark onPress={this.validate}>
+          <Text style={{ ...Fonts.style.h5 }}>{Strings.ar.send}</Text>
+        </Button>
 
       </View>)
   }
@@ -172,8 +170,16 @@ class AddAdScreen extends Component {
   }
 
 
-  //pickImage
+  validate = () => {
+    
+    const { addCategoryId, sub_category_id, title, address, city_id, phone, whatsapp, description, price } = this.props.addContent
+    if (addCategoryId && sub_category_id && title != '' && city_id && phone!= ''&&whatsapp!=''&&description!=''&& price!=''&& address != '') {
+      this.props.addAdRequest(this.props.addContent, this.props.user_id,this.state.image)
+    } else this.props.handleInput('error', Strings.ar.error.fillAll)
+  }
 
+
+  
   _pickImage = async () => {
     const {
       status: cameraRollPerm
@@ -181,17 +187,19 @@ class AddAdScreen extends Component {
 
     // only if user allows permission to camera roll
     if (cameraRollPerm === 'granted') {
-      let pickerResult = await ImagePicker.launchImageLibraryAsync({});
+      let pickerResult = await ImagePicker.launchImageLibraryAsync({base64: true,
+                                                                    allowsEditing: false,
+                                                                    aspect: [4, 3]});
       if (!pickerResult.cancelled) {
-        this.props.handleInput('image', pickerResult.uri);
+        let imageUri = pickerResult ? `data:image/png;base64,${pickerResult.base64}` : null;
+        this.setState({image:imageUri}) 
       }
     }
   };
-
 }
 
 const mapStateToProps = (state) => {
-  const { addCategoryId, sub_category_id, title, address, city_id, phone, whatsapp, description, image, price } = state.ads
+  const { addCategoryId, sub_category_id, title, address, city_id, phone, whatsapp, description, price } = state.ads
   const addContent = { addCategoryId, sub_category_id, title, address, city_id, phone, whatsapp, description, image, price }
   return {
     categories: state.categories.categories,

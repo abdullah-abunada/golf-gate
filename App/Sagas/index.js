@@ -11,8 +11,8 @@ import { ContactTypes } from '../Redux/ContactRedux'
 /* ------------- Sagas ------------- */
 import {login,register,setUser,logout} from './AuthSaga'
 import {getCategories,getSubCategories,getCities} from './CategoriesSagas'
-import {addAd} from './AdSagas'
-import {contactUs} from './ContactSagas'
+import {addAd,adminAdsRequest,adRequest,myAdsRequest} from './AdSagas'
+import {contactUs,report} from './ContactSagas'
 
 
 /* ------------- API ------------- */
@@ -30,10 +30,19 @@ export default function * root () {
     takeEvery(AuthTypes.LOGOUT, logout, api),
     takeEvery(AuthTypes.REGISTER_REQUEST, register, api),
     takeEvery(AuthTypes.SET_USER, setUser, api),
+
     takeEvery(CategoriesTypes.CATEGORIES_REQUEST, getCategories, api),
     takeEvery(CategoriesTypes.SUB_CATEGORIES_REQUEST, getSubCategories, api),
     takeEvery(CategoriesTypes.CITIES_REQUEST, getCities, api),
+
+    takeEvery(ContactTypes.REPORT_REQUEST, report, api),  
     takeEvery(ContactTypes.CONTACT_REQUEST, contactUs, api),
-    takeEvery(AdTypes.ADD_AD_REQUEST, addAd, api)
+
+    takeEvery(AdTypes.ADD_AD_REQUEST, addAd, api),
+    takeEvery(AdTypes.ADMIN_ADS_REQUEST, adminAdsRequest, api),
+    takeEvery(AdTypes.AD_REQUEST, adRequest, api),
+    takeEvery(AdTypes.MY_ADS_REQUEST, myAdsRequest, api)
+    
+    
   ])
 }

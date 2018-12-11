@@ -6,7 +6,7 @@ export default StyleSheet.create({
 
   inputContainer:{
     backgroundColor:Colors.grey,
-    margin:10,
+    margin:2,
     paddingRight:20
   },
   text:{
@@ -23,10 +23,22 @@ export default StyleSheet.create({
   },
   error:{
       color:'red',
-      alignSelf:'center'
+      alignSelf:'center',
+      ...Fonts.style.description,
+      margin:10
   },
   message:{
       color:Colors.green,
       alignItems:'center'
-  }
+  },
+  modal: {
+    alignItems: 'center',
+    width: "86%",
+    height: "90%",
+    borderRadius: 39,
+    borderWidth: 1,
+    borderColor: '#fff',
+    marginBottom:10,
+    paddingBottom:40
+},
 })

@@ -14,12 +14,12 @@ import { call, put,select} from 'redux-saga/effects'
 import ContactActions from '../Redux/ContactRedux'
 import { AuthSelectors } from '../Redux/AuthRedux'
 
-export function * contactUs (api, {subject,message}) {
+export function * contactUs (api, {subject,message,user_id}) {
 
   const obj = {
     subject:subject,
     message:message,
-    user_id : 12
+    user_id 
   }
   console.warn(obj.subject)
   // make the call to the api
@@ -30,7 +30,27 @@ export function * contactUs (api, {subject,message}) {
     // You might need to change the response here - do this with a 'transform',
     // located in ../Transforms/. Otherwise, just pass the data back from the api.
     console.warn(response.data)
-    yield put(ContactActions.contactSuccess(response.data))
+    yield put(ContactActions.contactSuccess())
+  } else {
+    yield put(ContactActions.contactFailure())
+  }
+}
+
+export function * report (api, {user_id,why,advertisement_id}) {
+
+  const obj = {
+    user_id,why,advertisement_id
+  }
+  console.warn(obj.subject)
+  // make the call to the api
+  const response = yield call(api.report,obj)
+  console.warn(response)
+  // success?
+  if (response.ok) {
+    // You might need to change the response here - do this with a 'transform',
+    // located in ../Transforms/. Otherwise, just pass the data back from the api.
+    console.warn(response.data)
+    yield put(ContactActions.contactSuccess())
   } else {
     yield put(ContactActions.contactFailure())
   }

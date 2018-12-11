@@ -3,6 +3,14 @@ import ProfileScreen from "../containers/ProfileScreen";
 
 export default Strings ={
     ar: {
+        error:{
+            tooShort:'كلمة السر ضعيفة',
+            fillAll:'يجب ملأ كل المعلومات',
+            sendingError:'يرجى اعادة المحاولة'
+        },
+        success:{
+            sentSuccessfully:'تمت العملية بنجاح',
+        },
         errorInEmailForm:'خطأ في البريد الإلكتروني',
         errorMatchPassword:'كلمة المرور غير متطابقه',
         require:'مطلوب',
@@ -46,6 +54,7 @@ export default Strings ={
         PolicyScreen:'شروط الخصوصية',
         myAds:'اعلاناتي',
         addAd :'اضف اعلان',
+        page:'صفحة',
         policy:`Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in feugiat dolor. Cras maximus lacus in tellus vulputate lobortis. Aenean sodales nulla sed sodales sagittis. Praesent ut neque magna. Mauris vel est nec ipsum fermentum ornare eget a nulla. Quisque molestie lectus purus. Cras gravida ligula eget felis convallis, et dapibus turpis faucibus. Praesent suscipit ultricies arcu, ut ultrices sapien dapibus ac. Sed neque diam, faucibus a erat eu, interdum suscipit mi. Proin rhoncus posuere ligula.
         Donec eget mi ante. Ut ac arcu scelerisque neque convallis feugiat sed dapibus lorem. Proin ut dui eu urna facilisis congue quis non neque. Aenean ligula nunc, semper sit amet quam in, dignissim blandit sem. Duis ac dui ligula. Donec sed justo commodo, accumsan quam condimentum, consequat nisl. Praesent vitae feugiat sem. Donec bibendum, nisi in venenatis posuere, eros dui eleifend est, eu tristique tellus orci sit amet ipsum. Donec rhoncus iaculis ex, vehicula ornare ipsum commodo sit amet. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin non arcu sed nulla dictum sollicitudin. Cras convallis condimentum massa ut tempor. Fusce volutpat odio mi, ac mollis enim mattis ut. Sed commodo convallis dictum. Phasellus fringilla venenatis ex, tristique laoreet metus rhoncus nec. Nunc quis tristique ex, a rhoncus augue.`
 

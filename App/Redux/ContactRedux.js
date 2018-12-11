@@ -1,10 +1,11 @@
 import { createReducer, createActions } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
-
+import {Strings} from '../Themes'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  contactRequest: ['subject','message'],
+  contactRequest: ['subject','message','user_id'],
+  reportRequest: ['user_id','why','advertisement_id'],
   contactSuccess: ['payload'],
   contactFailure: null,
   handleInput : ['prop','value']
@@ -21,7 +22,9 @@ export const INITIAL_STATE = Immutable({
   data: null,
   fetching: null,
   payload: null,
-  error: ""
+  error: "",
+  why:"",
+  sentSuccess:""
 })
 
 /* ------------- Selectors ------------- */
@@ -40,17 +43,18 @@ export const request = (state, { data }) =>
 // successful api lookup
 export const success = (state, action) => {
   const { payload } = action
-  return state.merge({ fetching: false, error: null })
+  return state.merge({ fetching: false, error: null, sentSuccess:Strings.ar.success.sentSuccessfuly})
 }
 
 // Something went wrong somewhere.
 export const failure = state =>
-  state.merge({ fetching: false, error: true, payload: null })
+  state.merge({ fetching: false, error: true,error:Strings.ar.error.sendingError })
 
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CONTACT_REQUEST]: request,
+  [Types.REPORT_REQUEST]: request,
   [Types.CONTACT_SUCCESS]: success,
   [Types.CONTACT_FAILURE]: failure,
   [Types.HANDLE_INPUT]: handleInput

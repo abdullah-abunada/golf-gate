@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import { View, Text, Image, AsyncStorage ,FlatList} from 'react-native'
 import { Button } from 'react-native-elements'
 import {Icon} from 'native-base'
+import {BarIndicator} from 'react-native-indicators'
 
 import AuthActions from '../Redux/AuthRedux'
+import AdsActions from '../Redux/AdRedux'
 import { connect } from "react-redux";
 
 
@@ -26,28 +28,38 @@ class HomeScreen extends Component {
     }
     else {
       this.props.setUser(JSON.parse(user))
+      !this.props.admin_ads && this.props.adminAdsRequest()
     }
   }
 
-  state = {
-    dataObjects: [
-      {  uri:'https://images.pexels.com/photos/1020315/pexels-photo-1020315.jpeg?auto=compress&cs=tinysrgb&h=350' },
-      {  uri: 'https://images.pexels.com/photos/235986/pexels-photo-235986.jpeg?auto=compress&cs=tinysrgb&h=350' }
-    ]
-  }
+
 
 
   renderRow({ item }) {
     return (
-      <View style={{height:Metrics.screenHeight / 2 , margin : Metrics.baseMargin , backgroundColor : Colors.grey}}>
+      <View key={item.id} style={{height:Metrics.screenHeight / 3 , margin : Metrics.baseMargin , backgroundColor : Colors.grey}}>
       <Image  style={{flex: 1,width:null,height:50}}
-              source={{ uri: item.uri }}/>
+              source={{ uri: item.ads_image }}/>
       </View>
     )
   }
 
 
-
+  renderContent = () => {
+    if (this.props.fetching) {
+      return <BarIndicator color={Colors.grey} count={5}/>;
+    }
+    return (
+      <FlatList
+          contentContainerStyle={styles.listContent}
+          data={this.props.admin_ads}
+          renderItem={this.renderRow}
+          numColumns={1}
+          keyExtractor={this.keyExtractor}
+          initialNumToRender={this.oneScreensWorth}
+        />
+    )
+  }
 
   // The default function if no Key is provided is index
   // an identifiable key is important if you plan on
@@ -62,14 +74,7 @@ class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <FlatList
-          contentContainerStyle={styles.listContent}
-          data={this.state.dataObjects}
-          renderItem={this.renderRow}
-          numColumns={1}
-          keyExtractor={this.keyExtractor}
-          initialNumToRender={this.oneScreensWorth}
-        />
+        {this.renderContent()}
       </View>
     )
   }
@@ -78,14 +83,16 @@ class HomeScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.auth.user
-
+    user: state.auth.user,
+    admin_ads:state.ads.admin_ads,
+    fetching: state.ads.fetching
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setUser: (value) => dispatch(AuthActions.setUser(value))
+    setUser: (value) => dispatch(AuthActions.setUser(value)),
+    adminAdsRequest: () => dispatch(AdsActions.adminAdsRequest())
   }
 }
 

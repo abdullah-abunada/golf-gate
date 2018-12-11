@@ -13,6 +13,7 @@ import { Fonts,Strings, Colors } from '../Themes'
 
 // Styles
 import styles from './Styles/AddAdScreenStyles'
+import AdsCard from '../components/AdsCard';
 
 class ContactScreen extends Component {
 
@@ -24,11 +25,13 @@ class ContactScreen extends Component {
   };
 
 
-  handleLogin =()=>{
+  handleSend =()=>{
     const {subject,message} = this.props
     if(subject!=''&& message!='')
-    this.props.contactRequest(subject, message)
-    else this.props.handleInput('error','Strings.ar.errorLoginMessage')
+    this.props.contactRequest(subject, message,this.props.user_id)
+    else {
+      this.props.handleInput('error',Strings.ar.errorLoginMessage)
+    }
   }
 
   renderContent = () => {
@@ -52,7 +55,7 @@ class ContactScreen extends Component {
             value={this.props.message}
             multiline />
         </Item>
-        <Text style={{...Fonts.style.description,color:'red',alignSelf:'center'}}>message{this.props.error}</Text>
+        <Text style={{...Fonts.style.description,color:'red',alignSelf:'center'}}>{this.props.error}</Text>
       </View>
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Button full dark onPress={this.handleSend}>
@@ -73,16 +76,16 @@ class ContactScreen extends Component {
   }
 }
 
-const mapStateToProps = ({ contact }) => {
+const mapStateToProps = ({ contact ,auth}) => {
   const { message, subject, fetching,error } = contact
   return {
-    subject, message, fetching,error
+    subject, message, fetching,error,user_id:auth.user.user_id
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    contactRequest: (subject, message) => dispatch(ContactActions.contactRequest(subject, message)),
+    contactRequest: (subject, message,user_id) => dispatch(ContactActions.contactRequest(subject, message,user_id)),
     handleInput: (prop, value) => dispatch(ContactActions.handleInput(prop, value)),
   }
 }

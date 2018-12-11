@@ -4,6 +4,7 @@ import { Button } from 'react-native-elements'
 import {BarIndicator} from 'react-native-indicators'
 import {Icon} from 'native-base'
 
+import CategoriesCard from '../components/CategoriesCard'
 import CategoriesAction from '../Redux/CategoriesRedux'
 import { connect } from "react-redux";
 
@@ -27,11 +28,11 @@ class MainScreen extends Component {
 
   renderRow({ item }) {
     return (
-      <Button
-      large
-      key={item.id}
-      title={item.name}
-      onPress={() => this.props.navigation.navigate("SectionScreen",{cat_id:item.id,cat_name:item.name})} />
+      <CategoriesCard size={6} text={item.name} navigate={() => 
+        item.isSub ? 
+        this.props.navigation.navigate("AdsDetailsScreen",{sub_cat_id:item.sub_category_id,city_id:0,sub_cat:item.sub_category})
+        :this.props.navigation.navigate("SectionScreen",{cat_id:item.id,cat_name:item.name})
+      }/>
     )
   }
 

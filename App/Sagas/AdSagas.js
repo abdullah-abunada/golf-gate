@@ -10,22 +10,52 @@
 *    you'll need to define a constant in that file.
 *************************************************************/
 
-import { call, put,select} from 'redux-saga/effects'
+import { call, put} from 'redux-saga/effects'
 import AdActions from '../Redux/AdRedux'
+
 
 //import { RNToasty } from 'react-native-toasty'
 
-export function * addAd (api, {addContent,user_id}) {
+export function * adminAdsRequest (api,{}) {
+  const response = yield call(api.adminAdsRequest)
+  if (response.ok) {
+    yield put(AdActions.adminAdSuccess(response.data))
+  } else {
+    yield put(AdActions.addAdFailure(response.data.msg))
+  }
+}
 
+
+export function * adRequest (api,{params}) {
+
+  console.warn(params)
+  const response = yield call(api.getad,params)
+  if (response.ok) {
+    yield put(AdActions.adSuccess(response.data))
+  } else {
+    yield put(AdActions.adFailure())
+  }
+}
+export function * myAdsRequest (api,{params}) {
+
+  const response = yield call(api.getMyAds,params)
+  if (response.ok) {
+    yield put(AdActions.adSuccess(response.data))
+  } else {
+    yield put(AdActions.adFailure())
+  }
+}
+
+export function * addAd (api, {addContent,user_id ,image}) {
   console.warn(addContent)
   const obj = {
     ...addContent,
+    image,
     user_id
   }
 
   // make the call to the api
   const response = yield call(api.addAd,obj)
-  
   // success?
   if (response.ok) {
     if(response.data.success)  {

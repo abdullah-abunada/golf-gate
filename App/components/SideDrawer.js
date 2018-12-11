@@ -32,7 +32,10 @@ class SideDrawer extends Component {
         onPress={() => { Navigator.navigate("ProfileScreen") }}>
         <Text style={styles.labelStyle}>{Strings.ar.ProfileScreen}</Text>
       </Button>
-
+      <Button block  transparent style={styles.buttonStyle}
+        onPress={() => { Navigator.navigate("MyAddsScreen") }}>
+        <Text style={styles.labelStyle}>{Strings.ar.addAd}</Text>
+      </Button>
       <Button block  transparent style={styles.buttonStyle}
         onPress={() => { Navigator.navigate("AddAdScreen") }}>
         <Text style={styles.labelStyle}>{Strings.ar.addAd}</Text>
