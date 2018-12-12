@@ -27,8 +27,7 @@ export function * getCategories (api,{}) {
 export function * getCities (api,{}) {
   const response = yield call(api.getCities)
   if (response.ok) {
-   response.data.cities.push({id:0,name:'غير محدد'})
-   console.warn(response.data.cities)
+   response.data.cities.push({id:0,city:'غير محدد',created_at:'undefined'})
    yield put(CategoriesActions.citiesSuccess(response.data))
   } else {
     yield put(CategoriesActions.categoriesFailure())

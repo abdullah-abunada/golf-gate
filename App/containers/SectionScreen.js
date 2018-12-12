@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, FlatList, Image } from 'react-native'
-import { Icon, Input, Item, Picker, Text } from 'native-base'
+import { Icon, Item, Picker } from 'native-base'
 import { Button } from 'react-native-elements'
 import { BarIndicator } from 'react-native-indicators'
 import CategoriesCard from '../components/CategoriesCard'
@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 // Styles
 import styles from './Styles/AddAdScreenStyles'
 
-import { Metrics, Strings, Colors } from '../Themes'
+import {  Strings, Colors } from '../Themes'
 
 class SectionScreen extends Component {
 
@@ -52,24 +52,23 @@ class SectionScreen extends Component {
     })
   }
 
-
   renderContent = () => {
     if (this.props.fetching) {
       return <BarIndicator color={Colors.black} count={5} />;
     }
     return (
       <View style={{flex:3}}>
-        <Item style={styles.inputContainer}>
+       
+       <Item style={styles.inputContainer}>
           <Picker
             mode="dropdown"
-            selectedValue={this.props.selectedCity}
-            onValueChange={(key)=>this.props.handleInput('selectedCity', key)}
             placeholder={Strings.ar.chooseCity}
-            style={{ width: 120}}>
+            selectedValue={this.props.selectedCity}
+            onValueChange={(value) => this.props.handleInput('selectedCity', value)}
+            style={{ width: 120 }}>
             {this.renderCityPicker()}
           </Picker>
         </Item>
-
         <FlatList
           contentContainerStyle={styles.listContent}
           data={this.props.subCategories}

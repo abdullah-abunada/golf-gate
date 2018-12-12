@@ -39,6 +39,7 @@ export function * adRequest (api,{params}) {
 export function * myAdsRequest (api,{params}) {
 
   const response = yield call(api.getMyAds,params)
+  console.warn(response.data)
   if (response.ok) {
     yield put(AdActions.adSuccess(response.data))
   } else {
@@ -47,13 +48,11 @@ export function * myAdsRequest (api,{params}) {
 }
 
 export function * addAd (api, {addContent,user_id ,image}) {
-  console.warn(addContent)
   const obj = {
     ...addContent,
     image,
     user_id
   }
-
   // make the call to the api
   const response = yield call(api.addAd,obj)
   // success?

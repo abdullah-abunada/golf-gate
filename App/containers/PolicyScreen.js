@@ -24,7 +24,7 @@ class PolicyScreen extends Component {
        <View style={{ flex:1 , justifyContent: 'center',alignItems:'center' }}>
             <Thumbnail square style={{width:200, height:75}} source={Images.logo} />
           </View>
-        <ScrollView contentContainerStyle={{flex:3}} style={{flex:3,padding:15}}>
+        <ScrollView  style={{flex:3,padding:15}}>
           <Text style={{...Fonts.style.description}}>{Strings.ar.policy}</Text>
       </ScrollView>
       </View>

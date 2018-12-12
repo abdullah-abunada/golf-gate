@@ -30,11 +30,11 @@ export const AuthSelectors = {
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  email:'sid@sid.com',
-  password :'123456',
-  mobile:'0777465984',
-  address:'medea',
-  name:'sido',
+  email:'',
+  password :'',
+  mobile:'',
+  address:'',
+  name:'',
   image:null,
   fetching:false,
   error:'',

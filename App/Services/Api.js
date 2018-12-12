@@ -36,7 +36,7 @@ const create = () => {
   //const getad =(params)=> api.get('api/get/advertisement/for/sub_category='+2+'&city_id='+0+'&page='+1)
  
   const getad =(params)=> api.get('api/get/advertisement/for/sub_category='+params.sub_category+'&city_id='+params.city_id+'&page='+params.page)
-  const getMyAds =(params)=> api.get('api/get/advertisement/for/user/user_id='+2+'&&page=1')
+  const getMyAds =(params)=> api.get('api/get/advertisement/for/user/user_id='+params+'&&page=1')
   const adminAdsRequest =()=> api.get('api/get/admin_ads')
   const addAd = (obj) => api.post('api/advertisement/add', obj)
   
@@ -45,7 +45,7 @@ const create = () => {
     login,register,setAuthToken,removeAuthToken,logout,
     getCategories,getSubCategories,getCities,getDirecteCategories,
     getad,addAd,adminAdsRequest,getMyAds,
-    contactUs
+    contactUs,report
   }
 }
 

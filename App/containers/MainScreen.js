@@ -28,7 +28,7 @@ class MainScreen extends Component {
 
   renderRow({ item }) {
     return (
-      <CategoriesCard size={6} text={item.name} navigate={() => 
+      <CategoriesCard size={7} text={item.name} navigate={() => 
         item.isSub ? 
         this.props.navigation.navigate("AdsDetailsScreen",{sub_cat_id:item.sub_category_id,city_id:0,sub_cat:item.sub_category})
         :this.props.navigation.navigate("SectionScreen",{cat_id:item.id,cat_name:item.name})

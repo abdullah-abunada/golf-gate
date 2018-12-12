@@ -3,9 +3,9 @@ import { Image, View } from 'react-native'
 
 import { Constants, ImagePicker, Permissions } from 'expo';
 
-import { Icon, Input, Item, Picker, Text } from 'native-base'
+import { Icon, Input, Item, Picker, Text ,Button} from 'native-base'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-import { Button } from 'react-native-elements'
+
 import { BarIndicator } from 'react-native-indicators'
 
 import CategoriesAction from '../Redux/CategoriesRedux'
@@ -13,7 +13,7 @@ import AdAction from '../Redux/AdRedux'
 import { connect } from "react-redux";
 
 
-import { Strings, Colors } from '../Themes'
+import { Strings, Colors,Fonts } from '../Themes'
 // Styles
 import styles from './Styles/AddAdScreenStyles'
 
@@ -67,8 +67,9 @@ class AddAdScreen extends Component {
   renderContent = () => {
     if (this.props.fetching) return <BarIndicator color={Colors.black} count={5} />
     return (
-      <View style={{ flex: 1 }}>
-        <Item style={styles.inputContainer} >
+      <View style={{ flex: 1 ,paddingBottom:30}}>
+        <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.chooseCategory}</Text>
+       <Item style={styles.inputContainer} >
           <Picker
             mode="dropdown"
             placeholder={Strings.ar.chooseCategory}
@@ -78,7 +79,7 @@ class AddAdScreen extends Component {
             {this.renderCategoriePicker()}
           </Picker>
         </Item>
-
+        <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.chooseSubCategory}</Text>
         <Item style={styles.inputContainer}>
           <Picker
             mode="dropdown"
@@ -89,49 +90,48 @@ class AddAdScreen extends Component {
             {this.renderSubCategoriePicker()}
           </Picker>
         </Item>
-
-        <Item style={styles.inputContainer}>
+        <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.chooseCity}</Text>
+   <Item style={styles.inputContainer}>
           <Picker
             mode="dropdown"
             placeholder={Strings.ar.chooseCity}
             selectedValue={this.props.addContent.city_id}
             onValueChange={(value) => this.props.handleInput('city_id', value)}
-            uploadImage
             style={{ width: 120 }}>
             {this.renderCityPicker()}
           </Picker>
         </Item>
-
+        <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.address}</Text>
         <Item regular style={styles.inputContainer}>
           <Input placeholder={Strings.ar.address} textBox
             onChangeText={(value) => this.props.handleInput('address', value)}
             value={this.props.addContent.address} />
         </Item>
-
+        <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.title}</Text>
         <Item regular style={styles.inputContainer}>
           <Input placeholder={Strings.ar.title} textBox
             onChangeText={(value) => this.props.handleInput('title', value)}
             value={this.props.addContent.title} />
         </Item>
-
+        <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.price}</Text>
         <Item regular style={styles.inputContainer}>
           <Input placeholder={Strings.ar.price} textBox
             onChangeText={(value) => this.props.handleInput('price', value)}
             value={this.props.addContent.price} />
         </Item>
-
+        <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.mobile}</Text>
         <Item regular style={styles.inputContainer}>
           <Input style={styles.inputContainer} placeholder={Strings.ar.mobile} textBox
             onChangeText={(value) => this.props.handleInput('phone', value)}
             value={this.props.addContent.mobile} />
         </Item>
-
+        <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.whatsapp}</Text>
         <Item regular style={styles.inputContainer}>
           <Input placeholder={Strings.ar.whatsapp} textBox
             onChangeText={(value) => this.props.handleInput('whatsapp', value)}
             value={this.props.addContent.whatsapp} />
         </Item>
-
+        <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.description}</Text>
         <Item regular style={styles.inputContainer}>
           <Input placeholder={Strings.ar.description} textBox
             onChangeText={(value) => this.props.handleInput('description', value)}
@@ -155,7 +155,7 @@ class AddAdScreen extends Component {
 
         <Text style={styles.success}>{this.props.success}</Text>
         <Button full dark onPress={this.validate}>
-          <Text style={{ ...Fonts.style.h5 }}>{Strings.ar.send}</Text>
+          <Text style={{ ...Fonts.style.h5,color:Colors.white }}>{Strings.ar.send}</Text>
         </Button>
 
       </View>)
@@ -173,7 +173,7 @@ class AddAdScreen extends Component {
   validate = () => {
     
     const { addCategoryId, sub_category_id, title, address, city_id, phone, whatsapp, description, price } = this.props.addContent
-    if (addCategoryId && sub_category_id && title != '' && city_id && phone!= ''&&whatsapp!=''&&description!=''&& price!=''&& address != '') {
+    if(true) {
       this.props.addAdRequest(this.props.addContent, this.props.user_id,this.state.image)
     } else this.props.handleInput('error', Strings.ar.error.fillAll)
   }
@@ -181,7 +181,7 @@ class AddAdScreen extends Component {
 
   
   _pickImage = async () => {
-    const {
+   const {
       status: cameraRollPerm
     } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 
@@ -200,7 +200,7 @@ class AddAdScreen extends Component {
 
 const mapStateToProps = (state) => {
   const { addCategoryId, sub_category_id, title, address, city_id, phone, whatsapp, description, price } = state.ads
-  const addContent = { addCategoryId, sub_category_id, title, address, city_id, phone, whatsapp, description, image, price }
+  const addContent = { addCategoryId, sub_category_id, title, address, city_id, phone, whatsapp, description, price }
   return {
     categories: state.categories.categories,
     subCategories: state.categories.subCategories,
@@ -218,7 +218,7 @@ const mapDispatchToProps = (dispatch) => {
     categoriesRequest: () => dispatch(CategoriesAction.categoriesRequest()),
     subCategoriesRequest: (cat_id) => dispatch(CategoriesAction.subCategoriesRequest(cat_id)),
     citiesRequest: () => dispatch(CategoriesAction.citiesRequest()),
-    addAdRequest: (addContent, user_id) => dispatch(AdAction.addAdRequest(addContent, user_id)),
+    addAdRequest: (addContent, user_id,image) => dispatch(AdAction.addAdRequest(addContent, user_id,image)),
     handleInput: (prop, value) => dispatch(AdAction.handleInput(prop, value)),
   }
 }

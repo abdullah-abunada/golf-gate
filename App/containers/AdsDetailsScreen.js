@@ -47,7 +47,7 @@ class AdsDetailsScreen extends Component {
 
   _listEmptyComponent = () => {
      return(
-    <Text style={{...Fonts.style.description,color:Colors.black,marginTop:30,textAlign:'center'}}>
+    <Text style={{...Fonts.style.h5,color:Colors.black,marginTop:200,textAlign:'center'}}>
         {Strings.ar.noResults}
     </Text>)
   }
@@ -86,7 +86,7 @@ class AdsDetailsScreen extends Component {
         <View style={{ height: 50, backgroundColor: Colors.grey, flexDirection: 'row',position:'absolute',bottom:0,left:0,right:0, justifyContent: 'center', alignItems: 'center' }}>
           {this.props.actual_page > 1 && <Icon type='MaterialCommunityIcons' name='chevron-left' style={{ color: Colors.dark }} onPress={this._next} />}
           <Text style={{ ...Fonts.style.description, marginHorizontal: 30 }}>{Strings.ar.page}    {this.props.actual_page} / {this.props.last_page}</Text>
-          {this.props.actual_page !== this.props.last_page && <Icon type='MaterialCommunityIcons' name='chevron-right' style={{ color: Colors.dark }} onPress={this._next} />}
+          {this.props.actual_page <= this.props.last_page && <Icon type='MaterialCommunityIcons' name='chevron-right' style={{ color: Colors.dark }} onPress={this._next} />}
         
         </View>
       </View>

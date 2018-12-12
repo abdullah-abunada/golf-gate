@@ -13,7 +13,7 @@ import { Fonts,Strings, Colors } from '../Themes'
 
 // Styles
 import styles from './Styles/AddAdScreenStyles'
-import AdsCard from '../components/AdsCard';
+
 
 class ContactScreen extends Component {
 

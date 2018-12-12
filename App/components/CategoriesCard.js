@@ -10,7 +10,7 @@ import { Metrics,Colors,Fonts} from '../Themes'
 export default class CategoriesCard extends Component {
     render() {
         return (
-            <Card  style={{ height: Metrics.screenHeight / this.props.size, flex:1,backgroundColor:Colors.green,borderRadius:10}}>
+            <Card  style={{ height: Metrics.screenHeight / this.props.size, flex:1,backgroundColor:Colors.green,borderRadius:5}}>
                 <TouchableOpacity onPress={this.props.navigate} style={{justifyContent: 'center', alignItems: 'center',flex:1}}>
                     <View style={{ justifyContent: 'center', alignItems: 'center',flex:1 }}>
                         <Text style={{...Fonts.style.h5,color:Colors.white}}>{this.props.text}</Text>

@@ -41,7 +41,7 @@ export function * report (api, {user_id,why,advertisement_id}) {
   const obj = {
     user_id,why,advertisement_id
   }
-  console.warn(obj.subject)
+  console.warn(obj)
   // make the call to the api
   const response = yield call(api.report,obj)
   console.warn(response)
@@ -49,7 +49,6 @@ export function * report (api, {user_id,why,advertisement_id}) {
   if (response.ok) {
     // You might need to change the response here - do this with a 'transform',
     // located in ../Transforms/. Otherwise, just pass the data back from the api.
-    console.warn(response.data)
     yield put(ContactActions.contactSuccess())
   } else {
     yield put(ContactActions.contactFailure())

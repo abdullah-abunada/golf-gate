@@ -95,7 +95,7 @@ const AppStack = createDrawerNavigator(
     },
     {
          contentComponent: props => <SideDrawer/>,
-         initialRouteName: 'HomeStack',
+         initialRouteName: 'HomeScreen',
          drawerPosition :'right'
     }
 );

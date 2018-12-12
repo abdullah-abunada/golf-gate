@@ -51,7 +51,8 @@ export const subCatSuccess = (state, action) => {
 
 export const citiesSuccess = (state, action) => {
   const { cities } = action.payload
-  return state.merge({ fetching: false, error: null,cities:cities})
+  console.warn(cities)
+  return state.merge({ fetching: false, error: null,cities})
 }
 // Something went wrong somewhere.
 export const failure = state =>

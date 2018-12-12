@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 // import PropTypes from 'prop-types';
 import { View, Text } from 'react-native'
 import { Col, Row, Grid } from 'react-native-easy-grid';
-import { Button, Thumbnail } from 'native-base';
+import { Button, Thumbnail,Icon } from 'native-base';
 import Navigator from '../Navigation/Navigator'
 import { BarIndicator } from 'react-native-indicators';
 import { Colors, Images, Strings } from '../Themes/'
@@ -20,40 +20,56 @@ class SideDrawer extends Component {
     <Row size={2} style={styles.CotainerStyle}>
       <Button block transparent style={styles.buttonStyle}
         onPress={() => { Navigator.navigate("HomeScreen") }}>
+
         <Text style={styles.labelStyle}>{Strings.ar.HomeScreen}</Text>
+        <Icon active type='MaterialCommunityIcons' name="home" style={{ color: Colors.green }} />
       </Button>
 
       <Button block transparent style={styles.buttonStyle}
         onPress={() => { Navigator.navigate("MainScreen") }}>
-        <Text style={styles.labelStyle}>{Strings.ar.MainScreen}</Text>
+
+        <Text style={styles.labelStyle}>{Strings.ar.classes}</Text>
+        <Icon active type='MaterialCommunityIcons' name="file-document-box" style={{ color: Colors.green }} />
       </Button>
 
       <Button block transparent style={styles.buttonStyle}
         onPress={() => { Navigator.navigate("ProfileScreen") }}>
+
         <Text style={styles.labelStyle}>{Strings.ar.ProfileScreen}</Text>
+        <Icon active type='MaterialCommunityIcons' name="face-profile" style={{ color: Colors.green }} />
       </Button>
       <Button block  transparent style={styles.buttonStyle}
         onPress={() => { Navigator.navigate("MyAddsScreen") }}>
-        <Text style={styles.labelStyle}>{Strings.ar.addAd}</Text>
+
+        <Text style={styles.labelStyle}>{Strings.ar.myAds}</Text>
+        <Icon active type='MaterialCommunityIcons' name="equal-box" style={{ color: Colors.green }} />
       </Button>
       <Button block  transparent style={styles.buttonStyle}
         onPress={() => { Navigator.navigate("AddAdScreen") }}>
+
         <Text style={styles.labelStyle}>{Strings.ar.addAd}</Text>
+        <Icon active type='MaterialCommunityIcons' name="plus-box" style={{ color: Colors.green }} />
       </Button>
 
       <Button block transparent style={styles.buttonStyle}
         onPress={() => { Navigator.navigate("PolicyScreen") }}>
+ 
         <Text style={styles.labelStyle}>{Strings.ar.PolicyScreen}</Text>
+        <Icon active type='MaterialCommunityIcons' name="file" style={{ color: Colors.green }} />
       </Button>
 
       <Button block transparent style={styles.buttonStyle}
         onPress={() => { Navigator.navigate("ContactScreen") }}>
+
         <Text style={styles.labelStyle}>{Strings.ar.contactUs}</Text>
+        <Icon active type='MaterialCommunityIcons' name="send" style={{ color: Colors.green }} />
       </Button>
 
       <Button block transparent style={[styles.buttonStyle, { marginTop: 30 }]}
         onPress={() => this.props.logout()}>
+
         <Text style={styles.labelStyle}>{Strings.ar.logout}</Text>
+        <Icon active type='MaterialCommunityIcons' name="exit-to-app" style={{ color: Colors.green }} />
       </Button>
     </Row>)
 

@@ -6,7 +6,7 @@ export default StyleSheet.create({
 
   inputContainer:{
     backgroundColor:Colors.grey,
-    margin:2,
+    margin:5,
     paddingRight:20
   },
   text:{

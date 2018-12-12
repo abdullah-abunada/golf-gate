@@ -35,3 +35,8 @@ async componentDidMount() {
 }
 
 
+/*
+  Keystore password: cd4085ca2fff46989b5adad751e3f727
+  Key alias:         QHdhc3NpbWhlbm5vdW5lL2Jhd2FiYQ==
+  Key password:      63cf28b27f0f4b7d996731a3b8ab0bf6
+ */
