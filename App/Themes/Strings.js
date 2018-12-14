@@ -52,7 +52,7 @@ export default Strings ={
         //ScreensTitle:
         ProfileScreen:'الصفحة الشخصية',
         MainScreen:'الصفحة الرئيسية',
-        HomeScreen:'الصفحة الشخصية',
+        HomeScreen:'الاعلانات',
         PolicyScreen:'شروط الخصوصية',
         myAds:'اعلاناتي',
         addAd :'اضف اعلان',

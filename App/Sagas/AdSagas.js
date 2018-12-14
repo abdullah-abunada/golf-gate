@@ -11,8 +11,9 @@
 *************************************************************/
 
 import { call, put} from 'redux-saga/effects'
+import {delay} from 'redux-saga'
 import AdActions from '../Redux/AdRedux'
-
+import Navigator from '../Navigation/Navigator'
 
 //import { RNToasty } from 'react-native-toasty'
 
@@ -20,8 +21,10 @@ export function * adminAdsRequest (api,{}) {
   const response = yield call(api.adminAdsRequest)
   if (response.ok) {
     yield put(AdActions.adminAdSuccess(response.data))
+    yield delay(4000)
+    Navigator.navigate('MainScreen')
   } else {
-    yield put(AdActions.addAdFailure(response.data.msg))
+    Navigator.navigate('MainScreen')
   }
 }
 

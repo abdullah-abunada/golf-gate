@@ -12,7 +12,13 @@ import { connect } from "react-redux";
 import styles from './Styles/HomeScreenStyles'
 import {Metrics,Colors,Strings} from '../Themes'
 
+
+
 class HomeScreen extends Component {
+
+  state={
+    timer:0
+  }
 
   static navigationOptions = ({ navigation }) => {
     return {
@@ -21,6 +27,11 @@ class HomeScreen extends Component {
     };
   };
 
+
+
+  componentWillUnmount (){
+    clearTimeout(this.state.timer)
+  }
   async componentWillMount() {
     const user = await AsyncStorage.getItem('user')
     if (!user) {

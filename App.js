@@ -1,12 +1,20 @@
 import React from 'react';
 import RootContainer from './App/containers/RootContainer'
-
+import { I18nManager} from 'react-native';
+import {Updates} from 'expo'
 import createStore from './App/Redux'
 import { Provider } from 'react-redux'
-
+import RNRestart  from 'react-native-restart'
 import {AppLoading,Font} from 'expo'
 
-// create our store
+
+I18nManager.allowRTL(false)
+I18nManager.forceRTL(false)
+
+if(I18nManager.isRTL) {
+  Updates.reload()
+}
+
 const store = createStore()
 
 export default class App extends React.Component {
@@ -15,7 +23,9 @@ export default class App extends React.Component {
     fontLoaded: false
 }
 
+
 async componentDidMount() {
+
   await Font.loadAsync({
       'Roboto_medium': require('./assets/fonts/Roboto-Medium.ttf')
   });
@@ -24,6 +34,7 @@ async componentDidMount() {
 
 
   render() {
+
     if (!this.state.fontLoaded)
         return (<AppLoading/>)
     return (

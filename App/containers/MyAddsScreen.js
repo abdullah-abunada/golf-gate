@@ -57,7 +57,14 @@ class MyAddsScreen extends Component {
     if (this.props.fetching) {
       return <BarIndicator color={Colors.grey} count={5}/>;
     }
-   // const ads = this.props.ads.filter((item)=> this.state.selected===0?item)
+   /* startDate2.getTime() == startDate3.getTime() 
+    Date.now()
+    const ads = null
+    switch(this.state.selected){
+      case 0 : ads = this.props.ads.filter((item)=> item.created_at)
+      case 1 :ads = this.props.ads.filter((item)=> this.state.selected===0?item.)
+    }*/
+
     return (
       <FlatList
         contentContainerStyle={styles.listContent}
@@ -74,10 +81,10 @@ class MyAddsScreen extends Component {
   render () {
     return (
       <View style={styles.container}>
-       {<Segment style={{backgroundColor:'transparent'}}>
+       {/*<Segment style={{backgroundColor:'transparent'}}>
               <Button success onPress={()=>this.setState({selected:0})}  active={this.state.selected==1}><Text style={{...Fonts.style.h5}}>{Strings.ar.now}</Text></Button>
               <Button success onPress={()=>this.setState({selected:1})}  active={this.state.selected==0}><Text  style={{...Fonts.style.h5}}>{Strings.ar.previous}</Text></Button>
-       </Segment> }
+    </Segment>*/ }
        {
          this.renderContent()
        }

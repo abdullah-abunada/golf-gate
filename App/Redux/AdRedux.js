@@ -60,7 +60,7 @@ export const request = (state, { data }) =>
   // request the data from an api
 
   export const requestMyAds = (state, { data }) =>
-  state.merge({ fetching: true, data, payload: null })
+  state.merge({ fetching: true,ads:null, payload: null })
 
 // successful api lookup
 export const success = (state, action) => {

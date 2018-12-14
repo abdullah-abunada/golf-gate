@@ -1,5 +1,5 @@
 import { call, put, select } from 'redux-saga/effects'
-import { delay } from 'redux-saga'
+import {Strings} from '../Themes'
 import AuthActions from '../Redux/AuthRedux'
 
 
@@ -23,12 +23,12 @@ export function* login(api, { email, password }) {
       yield put(AuthActions.loginSuccess(response.data.user))
     }
     else {
-      yield put(AuthActions.loginFailure(response.data.msg))
+      yield put(AuthActions.loginFailure(Strings.ar.errorLoginMessage))
     }
 
   }
   else {
-    yield put(AuthActions.loginFailure('WRONG'))
+    yield put(AuthActions.loginFailure('خطا من السيرفر'))
   }
 }
 
@@ -57,12 +57,12 @@ export function* register(api, { name, mobile, address, email, password, image }
     }
     else {
       console.warn("notsuccess")
-      yield put(AuthActions.loginFailure(response.data.msg))
+      yield put(AuthActions.loginFailure(Strings.ar.errorSignupMessage))
     } 
   }
   else {
     console.warn(response)
-    yield put(AuthActions.loginFailure('WRONG'))
+    yield put(AuthActions.loginFailure('خطا من السيرفر'))
   }
 
 }

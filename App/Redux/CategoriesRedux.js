@@ -19,7 +19,43 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  categories: null,
+  categories:  [
+    {
+      id: 4,
+      name: "مباردات شركات ومؤسسات",
+       created_at : "2018-11-17 06:21:54"
+    },
+    {
+       id :  1 ,
+       name : "أيجار",
+       created_at : "2018-10-24 09:13:34"
+    },
+    {
+       id :  2 ,
+       name : "بيع",
+       created_at : "2018-10-24 09:13:34"
+    },
+    {
+        id :  5 ,
+        name : "مقيم عقارات",
+       created_at : "2018-11-17 06:21:19"
+    },
+    {
+        id :  3 ,
+        name : "عرض وسطاء عقارات",
+       created_at : "2018-11-17 06:20:42"
+    },
+    {
+        id :  4 ,
+        name : "عروض شركات و مؤسسات",
+       created_at : "2018-11-17 06:20:42"
+    },
+    {
+        id :  2 ,
+        name : " عرض مباشر من المالك",
+       created_at : "2018-10-25 09:47:37"
+    }
+  ],
   subCategories:null,
   cities:null,
   fetching: null,
@@ -41,6 +77,7 @@ export const request = (state) =>
 // successful api lookup
 export const catSuccess = (state, action) => {
   const { categories } = action.payload
+  console.warn(categories)
   return state.merge({ fetching: false, error: null,categories})
 }
 
