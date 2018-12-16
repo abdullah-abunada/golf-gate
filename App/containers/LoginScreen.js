@@ -1,8 +1,8 @@
 
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View ,Image} from 'react-native'
 import { Container, Content, Button, Icon, Text, Form, Item, Input, Label, Thumbnail } from 'native-base';
-
+import AdsActions from '../Redux/AdRedux'
 import AuthActions from '../Redux/AuthRedux'
 import { connect } from "react-redux";
 import { BarIndicator } from 'react-native-indicators'
@@ -35,7 +35,7 @@ class LoginScreen extends Component {
             value={this.props.password} />
         </Item>
 
-        <Text style={{ ...Fonts.style.description, margin:10,color: 'red', alignSelf: 'center' }}>{this.props.error}</Text>
+        <Text style={{ ...Fonts.style.description, margin: 10, color: 'red', alignSelf: 'center' }}>{this.props.error}</Text>
 
         <Button full dark onPress={this.handleLogin}>
           <Text style={{ ...Fonts.style.h5 }}>{Strings.ar.login}</Text>
@@ -59,13 +59,20 @@ class LoginScreen extends Component {
     } else this.props.handleInput('error', Strings.ar.error.fillAll)
   }
 
+  componentWillMount() {
+     this.props.adminAdsRequest(false)
+  }
 
   render() {
     return (
 
       <KeyboardAwareScrollView style={styles.container} enableOnAndroid>
-        <View style={{ height: Metrics.screenHeight, paddingBottom: 80 }}>
-          <View style={{ flex: 1 }} />
+        <View style={{ height: Metrics.screenHeight, paddingBottom: 40 }}>
+          <View style={{ flex: 1.5 ,marginTop:18}} >
+            {this.props.admin_ads && <Image style={{ flex: 1, width: null}}
+              source={{ uri: this.props.admin_ads[Math.floor(Math.random() * this.props.admin_ads.length)].ads_image }} />
+            }
+          </View>
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Thumbnail style={{ width: 200, height: 75 }} source={Images.logo} />
           </View>
@@ -79,13 +86,14 @@ class LoginScreen extends Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth ,ads}) => {
   return {
     email: auth.email,
     password: auth.password,
     fetching: auth.fetching,
     error: auth.error,
-    authToken: auth.user.token
+    authToken: auth.user.token,
+    admin_ads : ads.admin_ads,
   }
 }
 
@@ -93,6 +101,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     attemptLogin: (email, password) => dispatch(AuthActions.loginRequest(email, password)),
     handleInput: (prop, value) => dispatch(AuthActions.handleInput(prop, value)),
+    adminAdsRequest: (navigate) => dispatch(AdsActions.adminAdsRequest(navigate))
   }
 }
 

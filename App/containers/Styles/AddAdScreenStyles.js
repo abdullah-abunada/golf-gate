@@ -27,6 +27,12 @@ export default StyleSheet.create({
       ...Fonts.style.description,
       margin:10
   },
+  success:{
+    color:'green',
+    alignSelf:'center',
+    ...Fonts.style.description,
+    margin:10
+},
   message:{
       color:Colors.green,
       alignItems:'center'

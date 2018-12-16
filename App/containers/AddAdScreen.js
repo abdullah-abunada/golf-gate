@@ -32,7 +32,8 @@ class AddAdScreen extends Component {
 
   componentWillMount() {
     this.props.citiesRequest()
-    if (!this.props.categories) this.props.categoriesRequest()
+    this.props.categoriesRequest()
+    this.props.subCategoriesRequest(this.props.addContent.sub_category_id)
   }
 
   renderCategoriePicker = () => {
@@ -63,7 +64,7 @@ class AddAdScreen extends Component {
     this.props.subCategoriesRequest(key)
     this.props.handleInput('addCategoryId', key)
   }
-
+//17
   renderContent = () => {
     if (this.props.fetching) return <BarIndicator color={Colors.black} count={5} />
     return (
@@ -115,19 +116,19 @@ class AddAdScreen extends Component {
         </Item>
         <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.price}</Text>
         <Item regular style={styles.inputContainer}>
-          <Input placeholder={Strings.ar.price} textBox
+          <Input placeholder={Strings.ar.price} textBox   keyboardType="numeric"
             onChangeText={(value) => this.props.handleInput('price', value)}
             value={this.props.addContent.price} />
         </Item>
         <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.mobile}</Text>
         <Item regular style={styles.inputContainer}>
-          <Input style={styles.inputContainer} placeholder={Strings.ar.mobile} textBox
+          <Input style={styles.inputContainer} placeholder={Strings.ar.mobile} textBox  keyboardType="numeric"
             onChangeText={(value) => this.props.handleInput('phone', value)}
             value={this.props.addContent.mobile} />
         </Item>
         <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.whatsapp}</Text>
         <Item regular style={styles.inputContainer}>
-          <Input placeholder={Strings.ar.whatsapp} textBox
+          <Input placeholder={Strings.ar.whatsapp} textBox  keyboardType="numeric"
             onChangeText={(value) => this.props.handleInput('whatsapp', value)}
             value={this.props.addContent.whatsapp} />
         </Item>
@@ -152,6 +153,7 @@ class AddAdScreen extends Component {
         }
 
         <Text style={styles.error}>{this.props.error}</Text>
+        <Text style={styles.success}>{this.props.error}</Text>
 
         <Text style={styles.success}>{this.props.success}</Text>
         <Button full dark onPress={this.validate}>
@@ -206,7 +208,7 @@ const mapStateToProps = (state) => {
     subCategories: state.categories.subCategories,
     cities: state.categories.cities,
     addContent,
-    fetching: state.categories.fetching,
+    fetching: state.ads.fetching,
     error: state.ads.error,
     success: state.ads.success,
     user_id: state.auth.user.user_id

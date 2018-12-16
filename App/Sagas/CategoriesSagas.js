@@ -6,23 +6,12 @@ export function * getCategories (api,{}) {
 
   const response = yield call(api.getCategories)
   if (response.ok) {
-    const directCat = yield call(api.getDirecteCategories)
-    if(directCat.ok){
-      //merge sub categories with categories
-      const { sub_categories } = directCat.data
-          sub_categories.map((item) => {
-          item.id =  item.sub_category_id
-          item.name = item.sub_category
-          item.isSub = true
-          response.data.categories.push(item)
-      })
+          response.data.categories.push({id:3,name:'اخرى'})
       yield put(CategoriesActions.categoriesSuccess(response.data))
     }
-    else yield put(CategoriesActions.categoriesFailure()) 
-  } else {
-    yield put(CategoriesActions.categoriesFailure())
+    else yield put(CategoriesActions.categoriesFailure())
   }
-}
+
 
 export function * getCities (api,{}) {
   const response = yield call(api.getCities)

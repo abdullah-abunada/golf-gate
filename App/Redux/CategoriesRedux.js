@@ -19,7 +19,7 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  categories:  [
+  homeCategories:  [
     {
       id: 4,
       name: "مباردات شركات ومؤسسات",
@@ -56,6 +56,7 @@ export const INITIAL_STATE = Immutable({
        created_at : "2018-10-25 09:47:37"
     }
   ],
+  categories:null,
   subCategories:null,
   cities:null,
   fetching: null,

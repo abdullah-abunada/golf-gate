@@ -72,9 +72,9 @@ componentWillMount(){
 
         <View style={{ flex: .5, flexDirection: 'row' }}>
           <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'flex-start', marginRight: 10 }}>
-            <Button small transparent onPress={this._toggleModal} >
+            {this.props.edit && <Button small transparent onPress={this._toggleModal} >
               <Icon active name="alert" style={{ color: Colors.black }} />
-            </Button>
+            </Button>}
             <Button small transparent onPress={() => Linking.openURL(`whatsapp://send?&phone=${this.props.whatsapp}`)} >
               <Icon active type='MaterialCommunityIcons' name="whatsapp" style={{ color: Colors.green }} />
             </Button>

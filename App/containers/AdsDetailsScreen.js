@@ -32,6 +32,7 @@ class AdsDetailsScreen extends Component {
   renderRow({ item }) {
     return (
       <AdsCard 
+      edit
         key={item.id}
         id={item.id}
         title={item.title}

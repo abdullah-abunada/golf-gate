@@ -14,17 +14,20 @@ import { call, put} from 'redux-saga/effects'
 import {delay} from 'redux-saga'
 import AdActions from '../Redux/AdRedux'
 import Navigator from '../Navigation/Navigator'
+import {Strings} from '../Themes'
 
 //import { RNToasty } from 'react-native-toasty'
 
-export function * adminAdsRequest (api,{}) {
+export function * adminAdsRequest (api,{navigate}) {
   const response = yield call(api.adminAdsRequest)
   if (response.ok) {
     yield put(AdActions.adminAdSuccess(response.data))
-    yield delay(4000)
-    Navigator.navigate('MainScreen')
+    if(navigate){
+      yield delay(3000)
+      Navigator.navigate('MainScreen')
+    }
   } else {
-    Navigator.navigate('MainScreen')
+    if(navigate)Navigator.navigate('MainScreen')
   }
 }
 
@@ -60,13 +63,14 @@ export function * addAd (api, {addContent,user_id ,image}) {
   const response = yield call(api.addAd,obj)
   // success?
   if (response.ok) {
+    console.warn(response.data)
     if(response.data.success)  {
-         yield put(AdActions.addAdSuccess())
+         yield put(AdActions.addAdSuccess(response.data.msg))
     }
     else{
        yield put(AdActions.addAdFailure(response.data.msg))
     }
   } else {
-    yield put(AdActions.addAdFailure(response.data.msg))
+    yield put(AdActions.addAdFailure(Strings.ar.error.sendingError))
   }
 }

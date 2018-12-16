@@ -8,7 +8,6 @@ import AuthActions from '../Redux/AuthRedux'
 import AdsActions from '../Redux/AdRedux'
 import { connect } from "react-redux";
 
-
 import styles from './Styles/HomeScreenStyles'
 import {Metrics,Colors,Strings} from '../Themes'
 
@@ -29,9 +28,6 @@ class HomeScreen extends Component {
 
 
 
-  componentWillUnmount (){
-    clearTimeout(this.state.timer)
-  }
   async componentWillMount() {
     const user = await AsyncStorage.getItem('user')
     if (!user) {
@@ -39,7 +35,7 @@ class HomeScreen extends Component {
     }
     else {
       this.props.setUser(JSON.parse(user))
-      !this.props.admin_ads && this.props.adminAdsRequest()
+      this.props.adminAdsRequest(true)
     }
   }
 
@@ -57,6 +53,7 @@ class HomeScreen extends Component {
 
 
   renderContent = () => {
+  
     if (this.props.fetching) {
       return <BarIndicator color={Colors.grey} count={5}/>;
     }
@@ -103,7 +100,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setUser: (value) => dispatch(AuthActions.setUser(value)),
-    adminAdsRequest: () => dispatch(AdsActions.adminAdsRequest())
+    adminAdsRequest: (navigate) => dispatch(AdsActions.adminAdsRequest(navigate))
   }
 }
 

@@ -6,7 +6,7 @@ import {Strings} from '../Themes'
 const { Types, Creators } = createActions({
   adRequest: ['params'],
   myAdsRequest:['params'],
-  adminAdsRequest : [],
+  adminAdsRequest : ['navigate'],
   addAdRequest: ['addContent', 'user_id','image'],
   addAdSuccess: [],
   adSuccess: ['payload'],
@@ -24,7 +24,7 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   data: null,
   addCategoryId: 1,
-  sub_category_id: null,
+  sub_category_id: 4,
   title: '',
   address: '',
   city_id: 0,
@@ -75,8 +75,8 @@ export const adminAdSuccess = (state, action) => {
 }
 
 export const addAdSuccess = (state, action) => {
-  const { payload } = action
-  return state.merge({ fetching: false, error: null, success: Strings.ar.success.sentSuccessfully })
+  const { msg } = action.payload
+  return state.merge({ fetching: false, error: null, success: msg})
 }
 
 export const addAdFailure = (state, action) => {

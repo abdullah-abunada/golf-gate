@@ -20,6 +20,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.7.4",
     "react-native-modalbox": "^1.6.0",
     "react-native-restart": "0.0.7",
+    "react-native-restart-android": "0.0.7",
     "react-navigation": "^3.0.0",
     "react-redux": "^5.1.1",
     "redux": "^4.0.1",

@@ -1,17 +1,14 @@
 import React from 'react';
 import RootContainer from './App/containers/RootContainer'
-import { I18nManager} from 'react-native';
-import {Updates} from 'expo'
+import { I18nManager,BackAndroid ,Platform} from 'react-native';
 import createStore from './App/Redux'
 import { Provider } from 'react-redux'
-import RNRestart  from 'react-native-restart'
-import {AppLoading,Font} from 'expo'
+import {AppLoading,Font,Updates} from 'expo'
 
 
 I18nManager.allowRTL(false)
 I18nManager.forceRTL(false)
-
-if(I18nManager.isRTL) {
+if(I18nManager.isRTL){
   Updates.reload()
 }
 
