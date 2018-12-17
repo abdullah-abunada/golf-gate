@@ -73,13 +73,14 @@ class RegisterScreen extends Component {
             <Text style={{ ...Fonts.style.h5, color: 'black' }}>{Strings.ar.uploadImage}</Text>
             <Icon name='camera' style={{ color: Colors.black }} />
           </Button>
-              <Text style={{ ...Fonts.style.description,margin:10, color: 'red', alignSelf: 'center' }}>{this.props.error}</Text>
+            
               {this.state.image
            &&<Image
               source={{uri: this.state.image}}
               style={{ width: 50, height: 50 ,alignSelf:'center'}}
             />
             }
+              <Text style={{ ...Fonts.style.description,margin:10, color: 'red', alignSelf: 'center' }}>{this.props.error}</Text>
         </View>
         <View style={{ flex: .5, justifyContent: 'center', alignItems: 'center' }}>
           <Button full dark onPress={this.validate}>

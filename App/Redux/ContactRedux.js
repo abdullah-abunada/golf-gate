@@ -5,6 +5,7 @@ import {Strings} from '../Themes'
 
 const { Types, Creators } = createActions({
   contactRequest: ['subject','message','user_id'],
+  partnershipRequest: ['name','mobile','image'],
   reportRequest: ['user_id','why','advertisement_id'],
   contactSuccess: ['payload'],
   contactFailure: null,
@@ -19,6 +20,8 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   message :'',
   subject :'',
+  name:'',
+  mobile:'',
   data: null,
   fetching: null,
   payload: null,
@@ -54,6 +57,7 @@ export const failure = state =>
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CONTACT_REQUEST]: request,
+  [Types.PARTNERSHIP_REQUEST]: request,
   [Types.REPORT_REQUEST]: request,
   [Types.CONTACT_SUCCESS]: success,
   [Types.CONTACT_FAILURE]: failure,

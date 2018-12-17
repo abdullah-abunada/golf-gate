@@ -27,6 +27,7 @@ const create = () => {
 
   const contactUs = (obj) => api.post('api/contact_us', obj)
   const report = (obj) => api.post('api/report', obj)
+  const partnership = (obj) => api.post('api/user/send/partnership', obj)
 
   const getCategories =()=> api.get('api/categories')
   const getDirecteCategories =()=> api.get('api/direct_subcategories')
@@ -45,7 +46,7 @@ const create = () => {
     login,register,setAuthToken,removeAuthToken,logout,
     getCategories,getSubCategories,getCities,getDirecteCategories,
     getad,addAd,adminAdsRequest,getMyAds,
-    contactUs,report
+    contactUs,report,partnership
   }
 }
 

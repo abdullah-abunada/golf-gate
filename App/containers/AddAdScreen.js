@@ -5,7 +5,7 @@ import { Constants, ImagePicker, Permissions } from 'expo';
 
 import { Icon, Input, Item, Picker, Text ,Button} from 'native-base'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
+import ConfirmedModal from '../components/confirmedModal'
 import { BarIndicator } from 'react-native-indicators'
 
 import CategoriesAction from '../Redux/CategoriesRedux'
@@ -27,7 +27,11 @@ class AddAdScreen extends Component {
   };
 
   state={
-    image : null
+    image : null,
+    isModalVisible: false
+  }
+  _toggleModal = () => {
+    this.setState({ isModalVisible: !this.state.isModalVisible });
   }
 
   componentWillMount() {
@@ -69,6 +73,7 @@ class AddAdScreen extends Component {
     if (this.props.fetching) return <BarIndicator color={Colors.black} count={5} />
     return (
       <View style={{ flex: 1 ,paddingBottom:30}}>
+         {this.state.isModalVisible && <ConfirmedModal  onConfirm={this._toggleModal}/>}
         <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.chooseCategory}</Text>
        <Item style={styles.inputContainer} >
           <Picker
@@ -149,7 +154,7 @@ class AddAdScreen extends Component {
           && <Image
             source={{ uri: this.state.image }}
             style={{ width: 50, height: 50, alignSelf: 'center' }}
-          />
+          /> 
         }
 
         <Text style={styles.error}>{this.props.error}</Text>

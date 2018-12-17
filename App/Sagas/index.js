@@ -12,7 +12,7 @@ import { ContactTypes } from '../Redux/ContactRedux'
 import {login,register,setUser,logout} from './AuthSaga'
 import {getCategories,getSubCategories,getCities} from './CategoriesSagas'
 import {addAd,adminAdsRequest,adRequest,myAdsRequest} from './AdSagas'
-import {contactUs,report} from './ContactSagas'
+import {contactUs,report,partnership} from './ContactSagas'
 
 
 /* ------------- API ------------- */
@@ -37,6 +37,7 @@ export default function * root () {
 
     takeEvery(ContactTypes.REPORT_REQUEST, report, api),  
     takeEvery(ContactTypes.CONTACT_REQUEST, contactUs, api),
+    takeEvery(ContactTypes.PARTNERSHIP_REQUEST, partnership, api),
 
     takeEvery(AdTypes.ADD_AD_REQUEST, addAd, api),
     takeEvery(AdTypes.ADMIN_ADS_REQUEST, adminAdsRequest, api),

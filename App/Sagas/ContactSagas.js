@@ -36,6 +36,26 @@ export function * contactUs (api, {subject,message,user_id}) {
   }
 }
 
+export function * partnership (api, {name,mobile,image}) {
+
+  const obj = {
+    name,mobile,image
+  }
+  console.warn(obj)
+  // make the call to the api
+  const response = yield call(api.partnership,obj)
+  console.warn(response)
+  // success?
+  if (response.ok) {
+    // You might need to change the response here - do this with a 'transform',
+    // located in ../Transforms/. Otherwise, just pass the data back from the api.
+    console.warn(response.data)
+    yield put(ContactActions.contactSuccess())
+  } else {
+    yield put(ContactActions.contactFailure())
+  }
+}
+
 export function * report (api, {user_id,why,advertisement_id}) {
 
   const obj = {
