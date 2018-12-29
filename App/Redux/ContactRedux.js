@@ -5,11 +5,12 @@ import {Strings} from '../Themes'
 
 const { Types, Creators } = createActions({
   contactRequest: ['subject','message','user_id'],
-  partnershipRequest: ['name','mobile','image'],
+  partnershipRequest: ['user_id','image'],
   reportRequest: ['user_id','why','advertisement_id'],
   contactSuccess: ['payload'],
-  contactFailure: null,
-  handleInput : ['prop','value']
+  contactFailure: ['payload'],
+  handleInput : ['prop','value'],
+  resetForm:[]
 })
 
 export const ContactTypes = Types
@@ -27,7 +28,8 @@ export const INITIAL_STATE = Immutable({
   payload: null,
   error: "",
   why:"",
-  sentSuccess:""
+  sentSuccess:"",
+  isModalVisible:false
 })
 
 /* ------------- Selectors ------------- */
@@ -39,19 +41,22 @@ export const ContactSelectors = {
 /* ------------- Reducers ------------- */
 //handle input changes
 export const handleInput = (state,{prop,value}) => state.merge({ [prop]:value })
+export const resetForm = (state, action) => INITIAL_STATE
 // request the data from an api
 export const request = (state, { data }) =>
   state.merge({ fetching: true, data, payload: null })
 
 // successful api lookup
 export const success = (state, action) => {
-  const { payload } = action
-  return state.merge({ fetching: false, error: null, sentSuccess:Strings.ar.success.sentSuccessfuly})
+  console.warn(action)
+  return state.merge({ fetching: false, error: null, sentSuccess:action.payload,isModalVisible:true})
 }
 
 // Something went wrong somewhere.
-export const failure = state =>
-  state.merge({ fetching: false, error: true,error:Strings.ar.error.sendingError })
+export const failure = (state, action) => {
+  console.warn(action.payload)
+  return state.merge({ fetching: false, error:action.payload})
+}
 
 /* ------------- Hookup Reducers To Types ------------- */
 
@@ -61,5 +66,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.REPORT_REQUEST]: request,
   [Types.CONTACT_SUCCESS]: success,
   [Types.CONTACT_FAILURE]: failure,
-  [Types.HANDLE_INPUT]: handleInput
+  [Types.HANDLE_INPUT]: handleInput,
+  [Types.RESET_FORM]: resetForm
 })

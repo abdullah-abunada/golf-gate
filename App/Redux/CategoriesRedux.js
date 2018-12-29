@@ -6,10 +6,12 @@ import Immutable from 'seamless-immutable'
 const { Types, Creators } = createActions({
   categoriesRequest: [],
   subCategoriesRequest: ['cat_id'],
+  priceRequest: ['sub_cat_id'],
   citiesRequest: [],
   categoriesSuccess: ['payload'],
   subCategoriesSuccess: ['payload'],
   citiesSuccess:['payload'],
+  priceSuccess:['payload'],
   categoriesFailure: null
 })
 
@@ -58,6 +60,7 @@ export const INITIAL_STATE = Immutable({
   ],
   categories:null,
   subCategories:null,
+  price:null,
   cities:null,
   fetching: null,
   error: null
@@ -86,6 +89,11 @@ export const subCatSuccess = (state, action) => {
  const { sub_categories } = action.payload
   return state.merge({ fetching: false, error: null,subCategories:sub_categories})
 }
+export const priceSuccess = (state, action) => {
+  const { price } = action.payload
+   return state.merge({price,fetching: false})
+ }
+
 
 export const citiesSuccess = (state, action) => {
   const { cities } = action.payload
@@ -100,10 +108,12 @@ export const failure = state =>
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.CATEGORIES_REQUEST]: request,
+  [Types.PRICE_REQUEST]: request,
   [Types.SUB_CATEGORIES_REQUEST]: request,
   [Types.CITIES_REQUEST]: request,
   [Types.CATEGORIES_SUCCESS]: catSuccess,
   [Types.SUB_CATEGORIES_SUCCESS]: subCatSuccess,
   [Types.CITIES_SUCCESS]: citiesSuccess,
+  [Types.PRICE_SUCCESS]: priceSuccess,
   [Types.CATEGORIES_FAILURE]: failure
 })

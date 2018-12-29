@@ -34,7 +34,6 @@ export function * adminAdsRequest (api,{navigate}) {
 
 export function * adRequest (api,{params}) {
 
-  console.warn(params)
   const response = yield call(api.getad,params)
   if (response.ok) {
     yield put(AdActions.adSuccess(response.data))
@@ -42,8 +41,8 @@ export function * adRequest (api,{params}) {
     yield put(AdActions.adFailure())
   }
 }
-export function * myAdsRequest (api,{params}) {
 
+export function * myAdsRequest (api,{params}) {
   const response = yield call(api.getMyAds,params)
   console.warn(response.data)
   if (response.ok) {

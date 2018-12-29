@@ -49,7 +49,9 @@ export default Strings ={
         subject :'الموضوع',
         logout:'خروج',
         send:'ارسال',
+        partnershipRequest:`شكرا لاضافة اعلانك`,
         //ScreensTitle:
+        partnership:'شحن الحساب',
         ProfileScreen:'الصفحة الشخصية',
         MainScreen:'الصفحة الرئيسية',
         HomeScreen:'الاعلانات',

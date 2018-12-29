@@ -8,12 +8,13 @@ const { Types, Creators } = createActions({
   myAdsRequest:['params'],
   adminAdsRequest : ['navigate'],
   addAdRequest: ['addContent', 'user_id','image'],
-  addAdSuccess: [],
+  addAdSuccess: ['payload'],
   adSuccess: ['payload'],
   adminAdSuccess: ['payload'],
   handleInput: ['prop', 'value'],
   adFailure: null,
-  addAdFailure: ['message']
+  addAdFailure: ['payload'],
+  resetForm:null
 })
 
 export const AdTypes = Types
@@ -40,7 +41,8 @@ export const INITIAL_STATE = Immutable({
   fetching: null,
   payload: null,
   error: '',
-  success: ''
+  success: '',
+  isModalVisible:false  
 })
 
 /* ------------- Selectors ------------- */
@@ -52,7 +54,7 @@ export const AdSelectors = {
 /* ------------- Reducers ------------- */
 //handle input changes
 export const handleInput = (state, { prop, value }) => state.merge({ [prop]: value })
-
+export const resetForm = (state, action) => INITIAL_STATE
 // request the data from an api
 export const request = (state, { data }) =>
   state.merge({ fetching: true, data, payload: null })
@@ -75,13 +77,11 @@ export const adminAdSuccess = (state, action) => {
 }
 
 export const addAdSuccess = (state, action) => {
-  const { msg } = action.payload
-  return state.merge({ fetching: false, error: null, success: msg})
+  return state.merge({ fetching: false, error: null, success: action.payload , isModalVisible:true})
 }
 
 export const addAdFailure = (state, action) => {
-  const { message } = action
-  return state.merge({ fetching: false, error: Strings.ar.error.sendingError })
+  return state.merge({ fetching: false, error: action.payload })
 }
 
 // Something went wrong somewhere.
@@ -100,5 +100,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.AD_FAILURE]: failure,
   [Types.ADD_AD_SUCCESS]: addAdSuccess,
   [Types.ADD_AD_FAILURE]: addAdFailure,
-  [Types.HANDLE_INPUT]: handleInput
+  [Types.HANDLE_INPUT]: handleInput,
+  [Types.RESET_FORM]: resetForm
 })

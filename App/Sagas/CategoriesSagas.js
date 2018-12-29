@@ -12,7 +12,7 @@ export function * getCategories (api,{}) {
     else yield put(CategoriesActions.categoriesFailure())
   }
 
-
+  
 export function * getCities (api,{}) {
   const response = yield call(api.getCities)
   if (response.ok) {
@@ -30,6 +30,17 @@ export function *  getSubCategories(api, {cat_id}) {
   const response = yield call(api.getSubCategories,cat_id)
   if (response.ok) {
     yield put(CategoriesActions.subCategoriesSuccess(response.data))
+  } else {
+    yield put(CategoriesActions.categoriesFailure())
+  }
+
+}
+
+export function *  getPrice(api, {sub_cat_id}) {
+  const response = yield call(api.getPrice,sub_cat_id)
+  if (response.ok) {
+    console.warn(response.data)
+    yield put(CategoriesActions.priceSuccess(response.data))
   } else {
     yield put(CategoriesActions.categoriesFailure())
   }

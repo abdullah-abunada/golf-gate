@@ -1,10 +1,12 @@
 import React from 'react';
+import {I18nManager} from 'react-native';
 import { createStackNavigator, createDrawerNavigator, createSwitchNavigator ,createAppContainer } from 'react-navigation';
 
 
 //screens
 import RegisterScreen from '../containers/RegisterScreen';
 import LoginScreen from '../containers/LoginScreen';
+import ForgetPassword from '../containers/ForgetPassword';
 
 import HomeScreen from '../containers/HomeScreen';
 import MainScreen from '../containers/MainScreen';
@@ -15,6 +17,7 @@ import ProfileScreen from '../containers/ProfileScreen';
 import PolicyScreen from '../containers/PolicyScreen';
 import AddAdScreen from '../containers/AddAdScreen';
 import MyAddsScreen from '../containers/MyAddsScreen';
+import PartnershipScreen from '../containers/PartnershipScreen';
 
 //
 import ContactScreen from '../containers/ContactScreen';
@@ -36,7 +39,8 @@ const HomeStack = createStackNavigator(
     {
         MainScreen: { screen: MainScreen },
         AdsDetailsScreen: { screen: AdsDetailsScreen },
-        SectionScreen: { screen: SectionScreen }
+        SectionScreen: { screen: SectionScreen },
+        PartnershipScreen: { screen: PartnershipScreen }
 
     }, {
         defaultNavigationOptions: {
@@ -52,7 +56,8 @@ const HomeStack = createStackNavigator(
 
 const AuthStack = createStackNavigator({
     LoginScreen: { screen: LoginScreen },
-    RegisterScreen: { screen: RegisterScreen }
+    RegisterScreen: { screen: RegisterScreen },
+    ForgetPassword: { screen: ForgetPassword }
 }, {
         // Default config for all screens
         initialRouteName: 'LoginScreen',
@@ -96,7 +101,7 @@ const AppStack = createDrawerNavigator(
     {
          contentComponent: props => <SideDrawer/>,
          initialRouteName: 'HomeScreen',
-         drawerPosition :'right'
+         drawerPosition : 'right',drawerType :'back'
     }
 );
 

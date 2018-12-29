@@ -12,9 +12,13 @@ const { Types, Creators } = createActions({
   loginSuccess: ['authToken'],
   loginFailure: ['error'],
   logout: [],
+  resetForm: [],
   logoutSuccess: [],
   logoutFailure: ['error'],
-
+  checkMail:['email'],
+  checkCode:['code'],
+  newPassword:['email','password','confirm_password'],
+  forgetSuccess:['step']
 })
 
 export const AuthTypes = Types
@@ -34,7 +38,11 @@ export const INITIAL_STATE = Immutable({
   password :'',
   mobile:'',
   address:'',
+  verify_password:'',
   name:'',
+  code:'',
+  step:1,
+  isModalVisible:false,
   image:null,
   fetching:false,
   error:'',
@@ -54,17 +62,24 @@ export const INITIAL_STATE = Immutable({
 
 //handle input changes
 export const handleInput = (state,{prop,value}) => state.merge({ [prop]:value })
+export const resetForm = (state, action) => INITIAL_STATE
 //setUser
 export const setUser = (state,{user}) => state.merge({ user })
 
 // we're attempting to login
-export const request = (state) => state.merge({ fetching: true })
+export const request = (state) => state.merge({ fetching: true,error:'' })
 
 // we've successfully logged in
 export const success =  (state, data) => {
   console.warn(data.authToken)
   AsyncStorage.setItem('user',JSON.stringify(data.authToken)).then(()=>Navigator.navigate("HomeScreen"))
   return   state.merge({ fetching: false, error: null, user:data.authToken })
+}
+
+export const forgetSuccess =  (state, action) => {
+  console.warn(action.step)
+  if(action.step===0)   return state.merge({ fetching: false, error:'',isModalVisible:true })
+  return   state.merge({ fetching: false, error:'',step:action.step })
 }
 
 export const logoutSuccess =  (state) => {
@@ -80,6 +95,7 @@ export const logoutSuccess =  (state) => {
     token:null
   } })
 }
+
 
 // we've had a problem logging in
 export const failure = (state, { error }) => state.merge({ fetching: false, error})
@@ -98,6 +114,13 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.LOGOUT]: request,
   [Types.LOGOUT_SUCCESS]: logoutSuccess,
   [Types.LOGOUT_FAILURE]: failure,
+  [Types.RESET_FORM]: resetForm,
+  [Types.CHECK_MAIL]: request,
+  [Types.CHECK_CODE]: request,
+  [Types.NEW_PASSWORD]: request,
+  [Types.FORGET_SUCCESS]:forgetSuccess
+
+
 })
 
 /* ------------- Selectors ------------- */

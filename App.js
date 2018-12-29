@@ -1,16 +1,12 @@
 import React from 'react';
 import RootContainer from './App/containers/RootContainer'
-import { I18nManager,BackAndroid ,Platform} from 'react-native';
+import { I18nManager,BackAndroid ,Ios} from 'react-native';
 import createStore from './App/Redux'
 import { Provider } from 'react-redux'
 import {AppLoading,Font,Updates} from 'expo'
 
-
 I18nManager.allowRTL(false)
 I18nManager.forceRTL(false)
-if(I18nManager.isRTL){
-  Updates.reload()
-}
 
 const store = createStore()
 

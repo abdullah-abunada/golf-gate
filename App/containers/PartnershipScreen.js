@@ -1,11 +1,11 @@
 
 import React, { Component } from 'react'
-import { ScrollView, View } from 'react-native'
+import { Image, View } from 'react-native'
 
 import { Icon, Input, Item, Text,Button } from 'native-base'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { ImagePicker, Permissions } from 'expo';
 import { BarIndicator } from 'react-native-indicators'
-
+import ConfirmedModal from '../components/confirmedModal'
 import ContactActions from '../Redux/ContactRedux'
 import { connect } from "react-redux";
 
@@ -28,11 +28,16 @@ class PartnershipScreen extends Component {
   state={
     image : null
   }
+ 
+  _toggleModal = () => {
+    this.props.handleInput("isModalVisible",!this.props.isModalVisible);
+    this.props.navigation.navigate('MainScreen')
+  }
 
   handleSend =()=>{
     const {name,mobile} = this.props
-    if(subject!=''&& mobile!='' &&this.state.image)
-    this.props.partnershipRequest(name, message,this.props.user_id)
+    if(name!=''&& mobile!='' &&this.state.image)
+    this.props.partnershipRequest(this.props.user_id,this.state.image)
     else {
       this.props.handleInput('error',Strings.ar.error.fillAll)
     }
@@ -43,21 +48,21 @@ class PartnershipScreen extends Component {
       return <BarIndicator color={Colors.grey} count={5} />;
     }
     return (
-      <View style={{ flex: 1 ,justifyContent:'center',alignItems:'center',padding:20}}>
-      <View style={{ flex: 4 }}>
-        <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.subject}</Text>
+      <View style={{flex:1  ,justifyContent:'center',alignItems:'center'}}>
+       {this.props.isModalVisible && <ConfirmedModal message={this.props.sentSuccess} partnership onConfirm={this._toggleModal}/>}
+        <Text  style={{ ...Fonts.style.h5,margin:10 }}>{Strings.ar.name}</Text>
         <Item regular  style={styles.inputContainer} >
           <Input placeholder={Strings.ar.name} textBox
             onChangeText={(value) => { this.props.handleInput('name', value) }}
             value={this.props.name} />
         </Item>
-        <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.message}</Text>
+        <Text  style={{ ...Fonts.style.h5,margin:10 }}>{Strings.ar.mobile}</Text>
         <Item regular  style={styles.inputContainer} >
           <Input placeholder={Strings.ar.mobile} textBox
-            keyboardType='name-phone-pad'
+            keyboardType='phone-pad'
             onChangeText={(value) => { this.props.handleInput('mobile', value) }}
             value={this.props.mobile}
-            multiline />
+             />
         </Item>
         <Button full dark transparent onPress={this._pickImage}>
             <Text style={{ ...Fonts.style.h5, color: 'black' }}>{Strings.ar.uploadImage}</Text>
@@ -65,26 +70,25 @@ class PartnershipScreen extends Component {
           </Button>
               {this.state.image
            &&<Image
-              source={{uri: this.state.image}}
+              source={{uri: this.state.image.uri}}
               style={{ width: 50, height: 50 ,alignSelf:'center'}}
             />
             }
-        <Text style={{...Fonts.style.description,color:'red',alignSelf:'center'}}>{this.props.error}</Text>
-      </View>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{...Fonts.style.description,color:'red',alignSelf:'center',margin:20}}>{this.props.error}</Text>
+
+
         <Button full dark onPress={this.handleSend}>
           <Text style={{ ...Fonts.style.h5,color:'white' }}>{Strings.ar.send}</Text>
         </Button>     
-      </View>
     </View>
     )
   }
   render() {
     return (
 
-      <KeyboardAwareScrollView style={styles.container} enableOnAndroid>
+      <View style={{ flex: 1,padding:20}} enableOnAndroid>
         {this.renderContent()}
-      </KeyboardAwareScrollView>
+      </View>
 
     )
   }
@@ -96,27 +100,28 @@ class PartnershipScreen extends Component {
 
     // only if user allows permission to camera roll
     if (cameraRollPerm === 'granted') {
-      let pickerResult = await ImagePicker.launchImageLibraryAsync({base64: true,
-                                                                    allowsEditing: false,
-                                                                    aspect: [4, 3]});
+      let pickerResult = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: false,
+        aspect: [4, 3],
+      });
       if (!pickerResult.cancelled) {
-        let imageUri = pickerResult ? `data:image/png;base64,${pickerResult.base64}` : null;
-        this.setState({image:imageUri}) 
+        
+        this.setState({image:pickerResult}) 
       }
     }
-  };
+  }
 }
 
 const mapStateToProps = ({ contact ,auth}) => {
-  const { name, mobile, fetching,error } = contact
+  const { name, mobile, fetching,error,sentSuccess,isModalVisible} = contact
   return {
-    mobile, name, fetching,error,user_id:auth.user.user_id
+    mobile, name, fetching,error,sentSuccess,user_id:auth.user.user_id,isModalVisible
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    partnershipRequest: (name, mobile,image) => dispatch(ContactActions.partnershipRequest(name, mobile,image)),
+    partnershipRequest: (user_id,image) => dispatch(ContactActions.partnershipRequest(user_id,image)),
     handleInput: (prop, value) => dispatch(ContactActions.handleInput(prop, value)),
   }
 }

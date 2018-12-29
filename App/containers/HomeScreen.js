@@ -15,9 +15,6 @@ import {Metrics,Colors,Strings} from '../Themes'
 
 class HomeScreen extends Component {
 
-  state={
-    timer:0
-  }
 
   static navigationOptions = ({ navigation }) => {
     return {
@@ -37,9 +34,13 @@ class HomeScreen extends Component {
       this.props.setUser(JSON.parse(user))
       this.props.adminAdsRequest(true)
     }
+    this.props.navigation.addListener(
+      'willFocus',
+      async() => {
+        this.componentWillMount()
+      }
+    );
   }
-
-
 
 
   renderRow({ item }) {

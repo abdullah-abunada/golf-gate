@@ -1,4 +1,5 @@
-import { combineReducers } from 'redux'
+import { combineReducers, } from 'redux'
+
 import createStore from './createStore'
 import rootSaga from '../Sagas/'
 

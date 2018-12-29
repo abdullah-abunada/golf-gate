@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AuthActions from '../Redux/AuthRedux'
 import { connect } from "react-redux";
 // import PropTypes from 'prop-types';
-import { View, Text } from 'react-native'
+import { I18nManager, Text } from 'react-native'
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import { Button, Thumbnail,Icon } from 'native-base';
 import Navigator from '../Navigation/Navigator'
@@ -50,6 +50,12 @@ class SideDrawer extends Component {
         <Text style={styles.labelStyle}>{Strings.ar.addAd}</Text>
         <Icon active type='MaterialCommunityIcons' name="plus-box" style={{ color: Colors.green }} />
       </Button>
+      <Button block  transparent style={styles.buttonStyle}
+        onPress={() => { Navigator.navigate("PartnershipScreen") }}>
+
+        <Text style={styles.labelStyle}>{Strings.ar.partnership}</Text>
+        <Icon active type='MaterialCommunityIcons' name="check-decagram" style={{ color: Colors.green }} />
+      </Button>
 
       <Button block transparent style={styles.buttonStyle}
         onPress={() => { Navigator.navigate("PolicyScreen") }}>
@@ -65,7 +71,7 @@ class SideDrawer extends Component {
         <Icon active type='MaterialCommunityIcons' name="send" style={{ color: Colors.green }} />
       </Button>
 
-      <Button block transparent style={[styles.buttonStyle, { marginTop: 30 }]}
+      <Button block transparent style={[styles.buttonStyle, { marginTop: 15 }]}
         onPress={() => this.props.logout()}>
 
         <Text style={styles.labelStyle}>{Strings.ar.logout}</Text>
@@ -76,8 +82,8 @@ class SideDrawer extends Component {
   }
   render() {
     return (
-      <Grid style={{backgroundColor:Colors.grey}}>
-        <Row size={1} style={{ alignItems: 'center', justifyContent: 'center',flexDirection:'column',paddingTop:40}}>
+      <Grid style={{backgroundColor:Colors.white,marginRight: I18nManager.isRTL? 90 : null }}>
+        <Row size={.5} style={{ alignItems: 'center', justifyContent: 'center',flexDirection:'column',paddingTop:40}}>
           <Thumbnail
             source={this.props.image ? { uri: this.props.image } : Images.defaultProfile}
             style={{ width: 100, height: 100,margin:30 }} />

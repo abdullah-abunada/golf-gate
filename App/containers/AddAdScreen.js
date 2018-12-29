@@ -28,17 +28,29 @@ class AddAdScreen extends Component {
 
   state={
     image : null,
-    isModalVisible: false
   }
   _toggleModal = () => {
-    this.setState({ isModalVisible: !this.state.isModalVisible });
+    this.props.handleInput("isModalVisible",!this.props.isModalVisible);
+    this.props.resetForm()
+    this.props.navigation.navigate('MainScreen')
   }
 
   componentWillMount() {
     this.props.citiesRequest()
     this.props.categoriesRequest()
-    this.props.subCategoriesRequest(this.props.addContent.sub_category_id)
+    this.props.subCategoriesRequest(this.props.addContent.addCategoryId)
+    this.props.priceRequest(this.props.addContent.sub_category_id)
+    this.props.navigation.addListener(
+      'willBlur',
+      payload => {
+        this.props.resetForm()
+      }
+    );
+    
   }
+
+
+
 
   renderCategoriePicker = () => {
     if (this.props.categories) return this.props.categories.map((item) => {
@@ -68,12 +80,20 @@ class AddAdScreen extends Component {
     this.props.subCategoriesRequest(key)
     this.props.handleInput('addCategoryId', key)
   }
+
+  onSubCategorieChanged = (key) => {
+    this.props.handleInput('sub_category_id', key)
+    console.warn("called")
+    this.props.priceRequest(key)
+  }
+
+ 
 //17
   renderContent = () => {
     if (this.props.fetching) return <BarIndicator color={Colors.black} count={5} />
     return (
       <View style={{ flex: 1 ,paddingBottom:30}}>
-         {this.state.isModalVisible && <ConfirmedModal  onConfirm={this._toggleModal}/>}
+         {this.props.isModalVisible && <ConfirmedModal price={this.props.price} onConfirm={this._toggleModal}/>}
         <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.chooseCategory}</Text>
        <Item style={styles.inputContainer} >
           <Picker
@@ -91,7 +111,7 @@ class AddAdScreen extends Component {
             mode="dropdown"
             placeholder={Strings.ar.chooseSubCategory}
             selectedValue={this.props.addContent.sub_category_id}
-            onValueChange={(value) => this.props.handleInput('sub_category_id', value)}
+            onValueChange={this.onSubCategorieChanged}
             style={{ width: 120 }}>
             {this.renderSubCategoriePicker()}
           </Picker>
@@ -129,7 +149,7 @@ class AddAdScreen extends Component {
         <Item regular style={styles.inputContainer}>
           <Input style={styles.inputContainer} placeholder={Strings.ar.mobile} textBox  keyboardType="numeric"
             onChangeText={(value) => this.props.handleInput('phone', value)}
-            value={this.props.addContent.mobile} />
+            value={this.props.addContent.phone} />
         </Item>
         <Text  style={{ ...Fonts.style.h5 }}>{Strings.ar.whatsapp}</Text>
         <Item regular style={styles.inputContainer}>
@@ -158,15 +178,16 @@ class AddAdScreen extends Component {
         }
 
         <Text style={styles.error}>{this.props.error}</Text>
-        <Text style={styles.success}>{this.props.error}</Text>
 
-        <Text style={styles.success}>{this.props.success}</Text>
+
         <Button full dark onPress={this.validate}>
           <Text style={{ ...Fonts.style.h5,color:Colors.white }}>{Strings.ar.send}</Text>
         </Button>
 
       </View>)
   }
+  
+  
 
   render() {
     return (
@@ -178,10 +199,10 @@ class AddAdScreen extends Component {
 
 
   validate = () => {
-    
+
     const { addCategoryId, sub_category_id, title, address, city_id, phone, whatsapp, description, price } = this.props.addContent
     if(true) {
-      this.props.addAdRequest(this.props.addContent, this.props.user_id,this.state.image)
+     this.props.addAdRequest(this.props.addContent, this.props.user_id,this.state.image)
     } else this.props.handleInput('error', Strings.ar.error.fillAll)
   }
 
@@ -198,8 +219,9 @@ class AddAdScreen extends Component {
                                                                     allowsEditing: false,
                                                                     aspect: [4, 3]});
       if (!pickerResult.cancelled) {
-        let imageUri = pickerResult ? `data:image/png;base64,${pickerResult.base64}` : null;
+        let imageUri = pickerResult ? `data:image/jpeg;base64,${pickerResult.base64}` : null;
         this.setState({image:imageUri}) 
+
       }
     }
   };
@@ -213,10 +235,12 @@ const mapStateToProps = (state) => {
     subCategories: state.categories.subCategories,
     cities: state.categories.cities,
     addContent,
+    price:state.categories.price,
     fetching: state.ads.fetching,
     error: state.ads.error,
     success: state.ads.success,
-    user_id: state.auth.user.user_id
+    user_id: state.auth.user.user_id,
+    isModalVisible:state.ads.isModalVisible
   }
 }
 
@@ -224,9 +248,11 @@ const mapDispatchToProps = (dispatch) => {
   return {
     categoriesRequest: () => dispatch(CategoriesAction.categoriesRequest()),
     subCategoriesRequest: (cat_id) => dispatch(CategoriesAction.subCategoriesRequest(cat_id)),
+    priceRequest : (sub_cat_id) => dispatch(CategoriesAction.priceRequest(sub_cat_id)),
     citiesRequest: () => dispatch(CategoriesAction.citiesRequest()),
     addAdRequest: (addContent, user_id,image) => dispatch(AdAction.addAdRequest(addContent, user_id,image)),
     handleInput: (prop, value) => dispatch(AdAction.handleInput(prop, value)),
+    resetForm: () => dispatch(AdAction.resetForm())
   }
 }
 

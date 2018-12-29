@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import { View ,Image} from 'react-native'
+import { View, Image } from 'react-native'
 import { Container, Content, Button, Icon, Text, Form, Item, Input, Label, Thumbnail } from 'native-base';
 import AdsActions from '../Redux/AdRedux'
 import AuthActions from '../Redux/AuthRedux'
@@ -37,8 +37,13 @@ class LoginScreen extends Component {
 
         <Text style={{ ...Fonts.style.description, margin: 10, color: 'red', alignSelf: 'center' }}>{this.props.error}</Text>
 
+
+        <Button full transparent dark small onPress={() => this.props.navigation.navigate("ForgetPassword")}>
+          <Text style={{ ...Fonts.style.description, color: 'black' }}>{Strings.ar.forgetPassword}</Text>
+        </Button>
+
         <Button full dark onPress={this.handleLogin}>
-          <Text style={{ ...Fonts.style.h5 }}>{Strings.ar.login}</Text>
+          <Text style={{ ...Fonts.style.h5,color:Colors.white}}>{Strings.ar.login}</Text>
         </Button>
 
 
@@ -60,7 +65,7 @@ class LoginScreen extends Component {
   }
 
   componentWillMount() {
-     this.props.adminAdsRequest(false)
+    this.props.adminAdsRequest(false)
   }
 
   render() {
@@ -68,8 +73,8 @@ class LoginScreen extends Component {
 
       <KeyboardAwareScrollView style={styles.container} enableOnAndroid>
         <View style={{ height: Metrics.screenHeight, paddingBottom: 40 }}>
-          <View style={{ flex: 1.5 ,marginTop:18}} >
-            {this.props.admin_ads && <Image style={{ flex: 1, width: null}}
+          <View style={{ flex: 1.5, marginTop: 18 }} >
+            {this.props.admin_ads && <Image style={{ flex: 1, width: null }}
               source={{ uri: this.props.admin_ads[Math.floor(Math.random() * this.props.admin_ads.length)].ads_image }} />
             }
           </View>
@@ -86,14 +91,14 @@ class LoginScreen extends Component {
   }
 }
 
-const mapStateToProps = ({ auth ,ads}) => {
+const mapStateToProps = ({ auth, ads }) => {
   return {
     email: auth.email,
     password: auth.password,
     fetching: auth.fetching,
     error: auth.error,
     authToken: auth.user.token,
-    admin_ads : ads.admin_ads,
+    admin_ads: ads.admin_ads,
   }
 }
 

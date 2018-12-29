@@ -126,8 +126,9 @@ class RegisterScreen extends Component {
                                                                     allowsEditing: false,
                                                                     aspect: [4, 3]});
       if (!pickerResult.cancelled) {
-        let imageUri = pickerResult ? `data:image/png;base64,${pickerResult.base64}` : null;
+        let imageUri = pickerResult ? `data:image/jpeg;base64,${pickerResult.base64}` : null;
         this.setState({image:imageUri}) 
+        console.warn('jpeg')
       }
     }
   };

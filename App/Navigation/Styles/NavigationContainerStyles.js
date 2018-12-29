@@ -6,7 +6,7 @@ export default {
   },title:{
     color:Colors.white
   },iconContainer:{
-    paddingRight: 20
+    padding: 20
   },headerContainer:{
     justifyContent:'flex-end',
   }

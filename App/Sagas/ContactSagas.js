@@ -12,7 +12,7 @@
 
 import { call, put,select} from 'redux-saga/effects'
 import ContactActions from '../Redux/ContactRedux'
-import { AuthSelectors } from '../Redux/AuthRedux'
+import { Strings } from '../Themes'
 
 export function * contactUs (api, {subject,message,user_id}) {
 
@@ -30,29 +30,39 @@ export function * contactUs (api, {subject,message,user_id}) {
     // You might need to change the response here - do this with a 'transform',
     // located in ../Transforms/. Otherwise, just pass the data back from the api.
     console.warn(response.data)
-    yield put(ContactActions.contactSuccess())
+    yield put(ContactActions.contactSuccess(""))
   } else {
-    yield put(ContactActions.contactFailure())
+    yield put(ContactActions.contactFailure(""))
   }
 }
 
-export function * partnership (api, {name,mobile,image}) {
+export function * partnership (api, {user_id,image}) {
 
-  const obj = {
-    name,mobile,image
-  }
-  console.warn(obj)
+  let uriParts = image.uri.split('.');
+  let fileType = uriParts[uriParts.length - 1];
+
+  let formData = new FormData();
+  formData.append('image', {
+    uri:image.uri,
+    name: `photo.${fileType}`,
+    type: `image/${fileType}`,
+  });
+  formData.append('user_id',user_id );
+  console.warn(formData)
   // make the call to the api
-  const response = yield call(api.partnership,obj)
-  console.warn(response)
+ const response = yield call(api.partnership,formData)
+
   // success?
   if (response.ok) {
-    // You might need to change the response here - do this with a 'transform',
-    // located in ../Transforms/. Otherwise, just pass the data back from the api.
-    console.warn(response.data)
-    yield put(ContactActions.contactSuccess())
+    if (response.data.success) {
+      yield put(ContactActions.resetForm()) 
+      yield put(ContactActions.contactSuccess(response.data.msg))
+    }
+    else {
+      yield put(ContactActions.contactFailure(response.data.msg))
+    }
   } else {
-    yield put(ContactActions.contactFailure())
+    yield put(ContactActions.contactFailure(Strings.ar.error.sendingError))
   }
 }
 
@@ -61,16 +71,16 @@ export function * report (api, {user_id,why,advertisement_id}) {
   const obj = {
     user_id,why,advertisement_id
   }
-  console.warn(obj)
-  // make the call to the api
+
   const response = yield call(api.report,obj)
-  console.warn(response)
+
   // success?
   if (response.ok) {
     // You might need to change the response here - do this with a 'transform',
     // located in ../Transforms/. Otherwise, just pass the data back from the api.
-    yield put(ContactActions.contactSuccess())
+    yield put(ContactActions.resetForm()) 
+    yield put(ContactActions.contactSuccess(Strings.ar.success.sentSuccessfuly))
   } else {
-    yield put(ContactActions.contactFailure())
+    yield put(ContactActions.contactFailure(Strings.ar.error.sendingError))
   }
 }

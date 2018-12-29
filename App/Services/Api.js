@@ -24,6 +24,10 @@ const create = () => {
   const login = (authObj) => api.post('api/user/login', authObj)
   const register = (authObj) => api.post('api/user/register', authObj)
   const logout =()=> api.get('api/logout')
+  const sendMail = (authObj) => api.post('api/send_your_email', authObj)
+  const sendCode = (authObj) => api.post('api/check_code', authObj)
+  const setPassword = (authObj) => api.post('api/reset_password', authObj)
+
 
   const contactUs = (obj) => api.post('api/contact_us', obj)
   const report = (obj) => api.post('api/report', obj)
@@ -33,6 +37,8 @@ const create = () => {
   const getDirecteCategories =()=> api.get('api/direct_subcategories')
   const getSubCategories =(cat_id)=> api.get('api/subcategories/category_id='+cat_id)
   const getCities =()=> api.get('api/cities')
+  const getPrice =(cat_id)=> api.get('/api/get/price/for/sub_category_id='+cat_id)
+
   
   //const getad =(params)=> api.get('api/get/advertisement/for/sub_category='+2+'&city_id='+0+'&page='+1)
  
@@ -43,8 +49,8 @@ const create = () => {
   
   return {
     // a list of the API functions from step 2
-    login,register,setAuthToken,removeAuthToken,logout,
-    getCategories,getSubCategories,getCities,getDirecteCategories,
+    login,register,setAuthToken,removeAuthToken,logout,sendCode,sendMail,setPassword,
+    getCategories,getSubCategories,getCities,getDirecteCategories,getPrice,
     getad,addAd,adminAdsRequest,getMyAds,
     contactUs,report,partnership
   }
