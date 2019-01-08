@@ -61,7 +61,7 @@ class ForgetPassword extends Component {
     return (
       <View style={{ flex: .5, justifyContent: 'space-around' }}>
       <Text style={{ ...Fonts.style.h5, margin: 10, alignSelf: 'center' }}>
-        ادخل الكود الدي ارسلناه لك على الايمايل
+        ادخل الكود الذي ارسلناه لك على الايمايل
         </Text>
         <Item regular style={styles.inputContainer} >
           <Input placeholder={Strings.ar.code} textBox keyboardType='numeric'
