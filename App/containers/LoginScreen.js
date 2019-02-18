@@ -86,7 +86,7 @@ class LoginScreen extends Component {
       </KeyboardAwareScrollView>
 
 
-
+ 
     )
   }
 }

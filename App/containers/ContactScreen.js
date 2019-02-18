@@ -20,7 +20,7 @@ class ContactScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerTitle: Strings.ar.contactUs,
-      headerRight: (<Icon name='menu' style={{ color: Colors.white }} onPress={() => navigation.openDrawer()} />)
+      headerRight: (<Icon name='menu' style={{ color: Colors.red }} onPress={() => navigation.openDrawer()} />)
     };
   };
 
