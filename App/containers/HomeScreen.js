@@ -27,13 +27,11 @@ class HomeScreen extends Component {
 
   async componentWillMount() {
     const user = await AsyncStorage.getItem('user')
-    if (!user) {
-      this.props.navigation.navigate('LoginScreen')
-    }
-    else {
+    if (user) {
       this.props.setUser(JSON.parse(user))
-      this.props.adminAdsRequest(true)
     }
+    this.props.adminAdsRequest(true)
+
     this.props.navigation.addListener(
       'willFocus',
       async() => {

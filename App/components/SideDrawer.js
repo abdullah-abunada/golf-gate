@@ -11,6 +11,27 @@ import { Colors, Images, Strings } from '../Themes/'
 
 class SideDrawer extends Component {
 
+  renderLogIn = ()=>{
+    if(this.props.username){
+      return (
+          <Button block transparent style={[styles.buttonStyle, { marginTop: 15 }]}
+                  onPress={() => this.props.logout()}>
+
+            <Text style={styles.labelStyle}>{Strings.ar.logout}</Text>
+            <Icon active type='MaterialCommunityIcons' name="exit-to-app" style={{ color: Colors.green }} />
+          </Button>
+      );
+    }else{
+      return (
+          <Button block transparent style={[styles.buttonStyle, { marginTop: 15 }]}
+                  onPress={ () => { Navigator.navigate("LoginScreen") }}>
+
+            <Text style={styles.labelStyle}>{Strings.ar.login}</Text>
+            <Icon active type='MaterialCommunityIcons' name="login-variant" style={{ color: Colors.green }} />
+          </Button>
+      );
+    }
+  }
 
   renderContent = ()=>{
     if (this.props.fetching) {
@@ -71,12 +92,8 @@ class SideDrawer extends Component {
         <Icon active type='MaterialCommunityIcons' name="send" style={{ color: Colors.green }} />
       </Button>
 
-      <Button block transparent style={[styles.buttonStyle, { marginTop: 15 }]}
-        onPress={() => this.props.logout()}>
+      {this.renderLogIn()}
 
-        <Text style={styles.labelStyle}>{Strings.ar.logout}</Text>
-        <Icon active type='MaterialCommunityIcons' name="exit-to-app" style={{ color: Colors.green }} />
-      </Button>
     </Row>)
 
   }
@@ -98,10 +115,12 @@ class SideDrawer extends Component {
 
 
 const mapStateToProps = ({ auth }) => {
-  return {
-    username: auth.user.name,
-    image: auth.user.image,
-    fetching : auth.fetching
+  if(auth){
+    return {
+      username: auth.user.name,
+      image: auth.user.image,
+      fetching : auth.fetching
+    }
   }
 }
 

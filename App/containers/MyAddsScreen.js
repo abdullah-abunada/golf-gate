@@ -54,13 +54,26 @@ class MyAddsScreen extends Component {
   }
 
   renderContent = () => {
+
+    if(!this.props.user_id){
+      return (
+          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            <Icon type='MaterialCommunityIcons' name="cat" style={{ color: Colors.green, fontSize: 80, textAlign:'center', justifyContent: 'center'}} />
+            <Text style={{...Fonts.style.h5,color:Colors.black,textAlign:'center', marginBottom: 50}}>
+              {Strings.ar.notAuth}
+            </Text>
+          </View>
+      )
+    }
+
     if (this.props.fetching) {
       return <BarIndicator color={Colors.grey} count={5}/>;
     }
+
    /* startDate2.getTime() == startDate3.getTime() 
     Date.now()
     const ads = null
-    switch(this.state.selected){
+    switch(this.state.selected){d
       case 0 : ads = this.props.ads.filter((item)=> item.created_at)
       case 1 :ads = this.props.ads.filter((item)=> this.state.selected===0?item.)
     }*/
