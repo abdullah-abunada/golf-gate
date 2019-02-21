@@ -14,7 +14,7 @@ const { Types, Creators } = createActions({
   handleInput: ['prop', 'value'],
   adFailure: null,
   addAdFailure: ['payload'],
-  resetForm:null
+  resetAddForm:null
 })
 
 export const AdTypes = Types
@@ -54,7 +54,7 @@ export const AdSelectors = {
 /* ------------- Reducers ------------- */
 //handle input changes
 export const handleInput = (state, { prop, value }) => state.merge({ [prop]: value })
-export const resetForm = (state, action) => INITIAL_STATE
+export const resetAddForm = (state, action) => INITIAL_STATE
 // request the data from an api
 export const request = (state, { data }) =>
   state.merge({ fetching: true, data, payload: null })
@@ -101,5 +101,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.ADD_AD_SUCCESS]: addAdSuccess,
   [Types.ADD_AD_FAILURE]: addAdFailure,
   [Types.HANDLE_INPUT]: handleInput,
-  [Types.RESET_FORM]: resetForm
+  [Types.RESET_ADD_FORM]: resetAddForm
 })
